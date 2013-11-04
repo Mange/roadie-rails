@@ -8,7 +8,7 @@ This gem hooks up your Rails application with Roadie to help you generate HTML e
 
 ## Installation ##
 
-Add this gem to your Gemfile and bundle.
+[Add this gem to your Gemfile as recommended by Rubygems][gem] and run `bundle install`.
 
 ```ruby
 gem 'roadie-rails', '~> x.y.0'
@@ -160,6 +160,8 @@ class MyOtherMailer
 end
 ```
 
+If you want to see the available configuration options, see the [Roadie gem][roadie].
+
 ### Templates ###
 
 Use normal `stylesheet_link_tag` and `foo_path` methods when generating your email and Roadie will look for the precompiled files on your filesystem, or by asking the asset pipeline to compile the files for you if it cannot be found.
@@ -240,3 +242,4 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 [roadie]: http://rubygems.org/gems/roadie
 [semver]: http://semver.org/
 [rdd]: http://tom.preston-werner.com/2010/08/23/readme-driven-development.html
+[gem]: http://rubygems.org/gems/roadie-rails

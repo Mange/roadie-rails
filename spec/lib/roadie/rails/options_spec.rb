@@ -12,17 +12,17 @@ module Roadie
       it "can set an before and after callback" do
         before = Proc.new {}
         after = Proc.new {}
-        options = Options.new(before_callback: before, after_callback: after)
-        options.before_callback.should == before
-        options.after_callback.should == after
+        options = Options.new(before_transformation: before, after_transformation: after)
+        options.before_transformation.should == before
+        options.after_transformation.should == after
       end
 
       describe "default settings" do
         subject(:options) { Options.new }
 
         its(:url_options) { should be_empty }
-        its(:before_callback) { should be_nil }
-        its(:after_callback) { should be_nil }
+        its(:before_transformation) { should be_nil }
+        its(:after_transformation) { should be_nil }
       end
     end
   end

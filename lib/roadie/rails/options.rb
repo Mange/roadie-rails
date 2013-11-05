@@ -1,12 +1,12 @@
 module Roadie
   module Rails
     class Options
-      attr_reader :url_options, :before_callback, :after_callback
+      attr_reader :url_options, :before_transformation, :after_transformation
 
       def initialize(options = {})
         @url_options = options.fetch :url_options, {}
-        @before_callback = options[:before_callback]
-        @after_callback = options[:after_callback]
+        @before_transformation = options[:before_transformation]
+        @after_transformation = options[:after_transformation]
       end
     end
   end

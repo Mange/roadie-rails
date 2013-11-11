@@ -3,6 +3,6 @@ guard :rspec, cli: "--format nested", all_after_pass: true, all_on_start: true, 
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
 
   watch('spec/spec_helper.rb')  { "spec" }
-  watch(%r{^spec/support/.+_\.rb$}) { "spec" }
+  watch(%r{^spec/support/.+\.rb$}) { "spec" }
 end
 

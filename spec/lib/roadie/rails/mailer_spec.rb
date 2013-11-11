@@ -31,7 +31,7 @@ module Roadie
         before do
           inliner = double "Mail inliner"
           inliner.stub(:execute) { |email| email }
-          stub_const "Roadie::Rails::MailInliner", double("MailInliner", new: inliner)
+          MailInliner.stub new: inliner
         end
 
         it "calls the original mail method with all options and the block" do

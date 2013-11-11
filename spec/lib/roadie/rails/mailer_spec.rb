@@ -46,7 +46,7 @@ module Roadie
 
         it "inlines the email" do
           inliner = double "Inliner"
-          MailInliner.should_receive(:new).with(email).and_return inliner
+          MailInliner.should_receive(:new).with(email, instance_of(Options)).and_return inliner
           inliner.should_receive(:execute).and_return "inlined email"
           instance.roadie_mail.should == "inlined email"
         end

@@ -3,7 +3,7 @@ module Roadie
     module Mailer
       def roadie_mail(options = {}, &block)
         email = mail(options, &block)
-        MailInliner.new(email).execute
+        MailInliner.new(email, roadie_options).execute
       end
 
       def roadie_options

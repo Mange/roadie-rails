@@ -9,7 +9,6 @@ describe "Integrations" do
     Nokogiri::HTML.parse mail.html_part.body.decoded
   end
 
-
   [
     RailsApp.new("Rails 3.0.x", 'rails_30'),
     RailsApp.new("Rails 3.1.x", 'rails_31'),
@@ -42,31 +41,6 @@ describe "Integrations" do
         email.delivery_method :test
         email.deliver
       end
-
-      it "does not add headers for the roadie options and keeps custom headers in place" do
-        email = app.read_email(:extra_email)
-        header_names = email.header.fields.map(&:name)
-        header_names.should_not include('css')
-        header_names.should include('X-Spam')
-      end
-
-      it "only removes the css option when disabled" do
-        app.before_mail %(
-          Rails.application.config.roadie.enabled = false
-        )
-
-        email = app.read_email(:normal_email)
-
-        email.header.fields.map(&:name).should_not include('css')
-
-        email.to.should == ['example@example.org']
-        email.from.should == ['john@example.com']
-        email.should have(2).parts
-
-        document = parse_html_in_email(email)
-        document.should have_selector('body h1')
-        document.should_not have_styling('background' => 'url(https://example.app.org/images/rails.png)').at_selector('.image')
-      end
     end
   end
 
@@ -74,6 +48,8 @@ describe "Integrations" do
     let(:app) {
       RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin)
     }
+
+    before { app.reset }
 
     let(:document) do
       parse_html_in_email app.read_email(:normal_email)

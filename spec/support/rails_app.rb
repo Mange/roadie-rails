@@ -1,7 +1,7 @@
 class RailsApp
   def initialize(name, path, options = {})
     @name = name
-    @path = File.expand_path("../railsapps/#{path}", __FILE__)
+    @path = File.expand_path("../../railsapps/#{path}", __FILE__)
     @runner = options.fetch(:runner, :script)
     reset
   end

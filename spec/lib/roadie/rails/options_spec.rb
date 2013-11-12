@@ -4,6 +4,9 @@ require 'spec_helper'
 module Roadie
   module Rails
     describe Options do
+
+      # TODO: Restructure examples by attribute name; test setters
+
       it "can be constructed with a hash" do
         options = Options.new(url_options: {host: "foo.com"})
         options.url_options.should == {host: "foo.com"}
@@ -20,6 +23,14 @@ module Roadie
       it "can have a list of asset providers" do
         provider = double "Asset provider"
         options = Options.new(asset_providers: [provider])
+        options.asset_providers.should be_instance_of(Roadie::ProviderList)
+        options.asset_providers.to_a.should == [provider]
+      end
+
+      it "is mutable" do
+        provider = double
+        options = Options.new
+        options.asset_providers = [provider]
         options.asset_providers.should be_instance_of(Roadie::ProviderList)
         options.asset_providers.to_a.should == [provider]
       end

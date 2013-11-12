@@ -16,17 +16,18 @@ module Roadie
         end
       end
 
-      it "adds the #roadie_mail method" do
-        some_mailer.new.should respond_to(:roadie_mail)
-      end
-
-      it "adds the #roadie_options method" do
-        some_mailer.new.should respond_to(:roadie_options)
+      describe "#roadie_options" do
+        it "returns Rails' roadie config" do
+          ::Rails.stub_chain :application, :config, roadie: "roadie config"
+          some_mailer.new.roadie_options.should == "roadie config"
+        end
       end
 
       describe "#roadie_mail" do
         let(:email) { Mail.new }
         let(:instance) { some_mailer.new(email) }
+
+        before { instance.stub roadie_options: Options.new }
 
         before do
           inliner = double "Mail inliner"
@@ -49,12 +50,6 @@ module Roadie
           MailInliner.should_receive(:new).with(email, instance_of(Options)).and_return inliner
           inliner.should_receive(:execute).and_return "inlined email"
           instance.roadie_mail.should == "inlined email"
-        end
-      end
-
-      describe "#roadie_options" do
-        it "returns a Roadie::Rails::Options instance" do
-          some_mailer.new.roadie_options.should be_instance_of(Roadie::Rails::Options)
         end
       end
     end

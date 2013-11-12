@@ -4,11 +4,28 @@ module Roadie
       attr_reader :url_options, :before_transformation, :after_transformation, :asset_providers
 
       def initialize(options = {})
-        @url_options           = options[:url_options]
-        @before_transformation = options[:before_transformation]
-        @after_transformation  = options[:after_transformation]
-        if options.has_key?(:asset_providers)
-          @asset_providers = ProviderList.wrap options[:asset_providers]
+        # TODO: Crash on unexpected keys
+        self.url_options           = options[:url_options]
+        self.before_transformation = options[:before_transformation]
+        self.after_transformation  = options[:after_transformation]
+        self.asset_providers       = options[:asset_providers]
+      end
+
+      def url_options=(options)
+        @url_options = options
+      end
+
+      def before_transformation=(callback)
+        @before_transformation = callback
+      end
+
+      def after_transformation=(callback)
+        @after_transformation = callback
+      end
+
+      def asset_providers=(providers)
+        if providers
+          @asset_providers = ProviderList.wrap providers
         end
       end
 

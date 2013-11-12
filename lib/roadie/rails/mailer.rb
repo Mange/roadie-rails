@@ -7,7 +7,7 @@ module Roadie
       end
 
       def roadie_options
-        Options.new
+        ::Rails.application.config.roadie
       end
     end
   end

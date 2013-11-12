@@ -12,3 +12,5 @@ require "roadie/rails/document_builder"
 require "roadie/rails/mail_inliner"
 
 require "roadie/rails/mailer"
+
+require "roadie/rails/railtie"

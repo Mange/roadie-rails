@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = %w[README.md Changelog.md LICENSE.txt]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rails", ">= 3.0", "<= 4.0"
+  spec.add_dependency "rails", ">= 3.0", "<= 4.0.1"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rspec-rails"

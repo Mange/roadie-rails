@@ -66,6 +66,113 @@ module Roadie
           document.asset_providers.should == providers
         end
       end
+
+      describe "merging" do
+        it "replaces options" do
+          options = Options.new(url_options: {host: "foo.com", port: 3000})
+          options.merge(url_options: {host: "bar.com", protocol: "https"}).url_options.should == {
+            host: "bar.com", protocol: "https"
+          }
+        end
+
+        it "does not mutate" do
+          options = Options.new(url_options: {})
+          options.merge url_options: {host: "foo.com"}
+          options.url_options.should == {}
+        end
+      end
+
+      describe "destructive merging" do
+        it "replaces options" do
+          options = Options.new(url_options: {host: "foo.com", port: 3000})
+          options.merge! url_options: {host: "bar.com", protocol: "https"}
+          options.url_options.should == {host: "bar.com", protocol: "https"}
+        end
+      end
+
+      shared_examples_for "attribute combination" do
+        it "combines the url options" do
+          options = Options.new(url_options: {host: "foo.com", port: 3000})
+          combine(options, url_options: {host: "bar.com", protocol: "https"}).url_options.should == {
+            host: "bar.com", port: 3000, protocol: "https"
+          }
+        end
+
+        it "combines before callbacks" do
+          value = 0
+          inc = proc { value += 1 }
+
+          options = Options.new(before_transformation: inc)
+          combined = combine(options, before_transformation: inc)
+
+          combined.before_transformation.call(0)
+          value.should == 2
+        end
+
+        it "combines after callbacks" do
+          value = 0
+          inc = proc { value += 1 }
+
+          options = Options.new(after_transformation: inc)
+          combined = combine(options, after_transformation: inc)
+
+          combined.after_transformation.call(0)
+          value.should == 2
+        end
+
+        it "combines asset providers" do
+          provider1 = double "Asset provider 1"
+          provider2 = double "Asset provider 2"
+          options = Options.new(asset_providers: [provider1])
+          combined = combine(options, asset_providers: [provider2])
+          combined.asset_providers.to_a.should == [provider1, provider2]
+        end
+
+        it "combines asset provider lists" do
+          provider1 = double "Asset provider 1"
+          provider2 = double "Asset provider 2"
+          options = Options.new(asset_providers: [provider1])
+          combined = combine(options, asset_providers: ProviderList.new([provider2]))
+          combined.asset_providers.to_a.should == [provider1, provider2]
+        end
+
+        it "appends singular asset providers" do
+          provider1 = double "Asset provider 1"
+          provider2 = double "Asset provider 2"
+          options = Options.new(asset_providers: [provider1])
+          combined = combine(options, asset_providers: provider2)
+          combined.asset_providers.to_a.should == [provider1, provider2]
+        end
+      end
+
+      describe "combining" do
+        it_behaves_like "attribute combination"
+
+        def combine(instance, options)
+          instance.combine(options)
+        end
+
+        it "does not mutate" do
+          options = Options.new(url_options: {})
+          options.combine url_options: {host: "foo.com"}
+          options.url_options.should == {}
+        end
+      end
+
+      describe "desctructive combination" do
+        it_behaves_like "attribute combination"
+
+        def combine(instance, options)
+          instance.combine!(options)
+          instance
+        end
+
+        it "mutates" do
+          options = Options.new(url_options: {})
+          options.combine! url_options: {host: "foo.com"}
+          options.url_options.should == {host: "foo.com"}
+        end
+      end
     end
   end
 end

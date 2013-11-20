@@ -35,6 +35,56 @@ module Roadie
         document.after_transformation = after_transformation
         document.asset_providers = asset_providers
       end
+
+      def merge(options)
+        dup.merge! options
+      end
+
+      def merge!(options)
+        [:url_options, :before_transformation, :after_transformation, :asset_providers].each do |attribute|
+          send "#{attribute}=", options.fetch(attribute, send(attribute))
+        end
+        self
+      end
+
+      def combine(options)
+        dup.combine! options
+      end
+
+      def combine!(options)
+        self.url_options = combine_hash url_options, options[:url_options]
+        self.before_transformation = combine_callable before_transformation, options[:before_transformation]
+        self.after_transformation = combine_callable after_transformation, options[:after_transformation]
+        self.asset_providers = combine_providers asset_providers, options[:asset_providers]
+        self
+      end
+
+      private
+      def combine_hash(first, second)
+        combine_nilable(first, second) do |a, b|
+          a.merge(b)
+        end
+      end
+
+      def combine_callable(first, second)
+        combine_nilable(first, second) do |a, b|
+          proc { |*args| a.call(*args); b.call(*args) }
+        end
+      end
+
+      def combine_providers(first, second)
+        combine_nilable(first, second) do |a, b|
+          ProviderList.new a.to_a + Array.wrap(b)
+        end
+      end
+
+      def combine_nilable(first, second)
+        if first && second
+          yield first, second
+        else
+          first ? first : second
+        end
+      end
     end
   end
 end

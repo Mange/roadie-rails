@@ -127,7 +127,7 @@ Roadie can be configured in three places, depending on how specific you want to 
 2. `YourMailer#roadie_options` (mailer, dynamic).
 3. Second argument to the `roadie_mail` (mail, specific and custom).
 
-Each level will be merged with the level before it.
+You can override at any level in the chain, depending on how specific you need to be.
 
 Only the first two methods are available to you if you use the `Automatic` module.
 
@@ -141,7 +141,7 @@ class MyMailer
 
   protected
   def roadie_options
-    {host: Product.current.host}
+    super.merge(url_options: {host: Product.current.host})
   end
 end
 
@@ -155,10 +155,39 @@ class MyOtherMailer
 
   private
   def roadie_options_for(user)
-    {host: user.host, scheme: (user.use_ssl? ? 'https' : 'http')}
+    roadie_options.combine({
+      asset_providers: [MyCustomProvider.new(user)],
+      url_options: {host: user.subdomain_with_host},
+    })
   end
 end
 ```
+
+If you `#merge` you will replace the older value outright:
+
+```ruby
+def roadie_options
+  original = super
+  original.url_options # => {protocol: "https", host: "foo.com"}
+  new = original.merge(url_options: {host: "bar.com"})
+  new.url_options # => {host: "bar.com"}
+  new
+end
+```
+
+If you want to combine two values, use `#combine`. `#combine` is closer to `Hash#deep_merge`:
+
+```ruby
+def roadie_options
+  original = super
+  original.url_options # => {protocol: "https", host: "foo.com"}
+  new = original.combine(url_options: {host: "bar.com"})
+  new.url_options # => {protocol: "https", host: "bar.com"}
+  new
+end
+```
+
+`#combine` is smarter than `Hash#deep_merge`, though. It can combine callback `proc`s (so both get called) and `Roadie::ProviderList`s as well.
 
 If you want to see the available configuration options, see the [Roadie gem][roadie].
 

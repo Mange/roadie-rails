@@ -4,8 +4,11 @@ module Roadie
   module Rails
     class Railtie < ::Rails::Railtie
       config.roadie = Roadie::Rails::Options.new
-      config.after_initialize do
-        config.roadie.asset_providers = Roadie::FilesystemProvider.new(::Rails.root)
+
+      initializer "roadie-rails.setup" do |app|
+        config.roadie.asset_providers = [
+          Roadie::FilesystemProvider.new(::Rails.root.join("public").to_s),
+        ]
       end
     end
   end

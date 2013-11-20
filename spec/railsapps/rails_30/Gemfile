@@ -2,3 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '~> 3.0.17'
 gem 'roadie-rails', path: '../../../'
+
+# Use git version of `roadie` until a full release have been made
+gem 'roadie', git: 'git://github.com/Mange/roadie.git', branch: 'master'

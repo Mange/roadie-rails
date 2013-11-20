@@ -9,7 +9,9 @@ class RailsApp
   def to_s() @name end
 
   def read_email(mail_name)
-    Mail.read_from_string run("puts Mailer.#{mail_name}.to_s")
+    result = run("puts Mailer.#{mail_name}.to_s")
+    raise "No email returned. Did the rails application crash?" if result.strip.empty?
+    Mail.read_from_string(result)
   end
 
   def reset

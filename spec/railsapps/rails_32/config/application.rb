@@ -17,6 +17,6 @@ module Rails32
     config.encoding = "utf-8"
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.action_mailer.default_url_options = {host: 'example.app.org'}
+    config.roadie.url_options = {host: 'example.app.org'}
   end
 end

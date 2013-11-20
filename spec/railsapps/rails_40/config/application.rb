@@ -13,6 +13,6 @@ Bundler.require(:default, Rails.env)
 
 module Rails40
   class Application < Rails::Application
-    config.action_mailer.default_url_options = {host: 'example.app.org'}
+    config.roadie.url_options = {host: 'example.app.org'}
   end
 end

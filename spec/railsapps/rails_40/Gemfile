@@ -4,3 +4,6 @@ gem 'rails', '4.0.0'
 gem 'sass-rails', '~> 4.0.0'
 
 gem 'roadie-rails', :path => '../../..'
+
+# Use git version of `roadie` until a full release have been made
+gem 'roadie', git: 'git://github.com/Mange/roadie.git', branch: 'master'

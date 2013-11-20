@@ -6,31 +6,45 @@
 set -e
 
 function header() {
-  echo -e "\n$1:\n======================================="
+  echo -e "\n$(tput setaf 5)$(tput smul)$1:$(tput sgr0)"
 }
+
+function green() {
+  echo $(tput setaf 2)$@$(tput sgr0)
+}
+
+function update() {
+  bundle update | grep -ve "^Using "
+}
+
+function install() {
+  bundle install --quiet && green "  OK"
+}
+
+root=$(dirname $0)
 
 if [[ $1 == "install" ]]; then
   header "Installing gem dependencies"
-  bundle install --quiet && echo "OK"
+  install
 
-  for app in spec/railsapps/*; do
+  for app_path in $root/spec/railsapps/*; do
     (
-      cd $app
-      header "Installing gems for $app"
-      bundle install --quiet && echo "OK"
+      cd $app_path
+      header "Installing gems for $(basename $app_path)"
+      install
     )
   done
   echo ""
 
 elif [[ $1 == "update" ]]; then
   header "Updating gem dependencies"
-  bundle update
+  update
 
-  for app in spec/railsapps/*; do
+  for app_path in $root/spec/railsapps/*; do
     (
-      cd $app
-      header "Updating $app"
-      bundle update
+      cd $app_path
+      header "Updating $(basename $app_path)"
+      update
     )
   done
   echo ""

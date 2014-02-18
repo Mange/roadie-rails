@@ -4,173 +4,124 @@ require 'spec_helper'
 module Roadie
   module Rails
     describe Options do
+      shared_examples_for "attribute" do |name|
+        describe name do
+          it "defaults to nil" do
+            Options.new.send(name).should be_nil
+          end
 
-      # TODO: Restructure examples by attribute name; test setters
+          it "can be set in the constructor" do
+            Options.new(name => valid_value).send(name).should == valid_value
+          end
 
-      it "can be constructed with a hash" do
-        options = Options.new(url_options: {host: "foo.com"})
-        options.url_options.should == {host: "foo.com"}
-      end
+          it "can be changed using setter" do
+            options = Options.new
+            options.send :"#{name}=", valid_value
+            options.send(name).should == valid_value
+          end
 
-      it "can set an before and after callback" do
-        before = Proc.new {}
-        after = Proc.new {}
-        options = Options.new(before_transformation: before, after_transformation: after)
-        options.before_transformation.should == before
-        options.after_transformation.should == after
-      end
+          it "can be applied to documents" do
+            fake_document = OpenStruct.new
+            options = Options.new(name => valid_value)
+            options.apply_to(fake_document)
+            fake_document.send(name).should == valid_value
+          end
 
-      it "can have a list of asset providers" do
-        provider = double "Asset provider"
-        options = Options.new(asset_providers: [provider])
-        options.asset_providers.should be_instance_of(Roadie::ProviderList)
-        options.asset_providers.to_a.should == [provider]
-      end
+          describe "merging" do
+            it "replaces values" do
+              options = Options.new(name => valid_value)
+              options.merge(name => other_valid_value).send(name).should == other_valid_value
+            end
 
-      it "is mutable" do
-        provider = double
-        options = Options.new
-        options.asset_providers = [provider]
-        options.asset_providers.should be_instance_of(Roadie::ProviderList)
-        options.asset_providers.to_a.should == [provider]
-      end
+            it "does not mutate instance" do
+              options = Options.new(name => valid_value)
+              options.merge(name => other_valid_value)
+              options.send(name).should == valid_value
+            end
+          end
 
-      describe "default settings" do
-        subject(:options) { Options.new }
+          describe "destructive merging" do
+            it "replaces values" do
+              options = Options.new(name => valid_value)
+              options.merge(name => other_valid_value).send(name).should == other_valid_value
+            end
+          end
 
-        its(:url_options) { should be_nil }
-        its(:before_transformation) { should be_nil }
-        its(:after_transformation) { should be_nil }
-        its(:asset_providers) { should be_nil }
-      end
+          describe "combining" do
+            it "combines the old and the new value" do
+              options = Options.new(name => valid_value)
+              combined = options.combine(name => other_valid_value)
+              expect_combinated_value combined.send(name)
+            end
 
-      describe "applying" do
-        fake_document = Struct.new(:url_options, :before_transformation, :after_transformation, :asset_providers)
-        let(:document) { fake_document.new }
+            it "does not mutate instance" do
+              options = Options.new(name => valid_value)
+              options.combine(name => other_valid_value)
+              options.send(name).should == valid_value
+            end
+          end
 
-        it "applies URL options" do
-          Options.new(url_options: {host: "bar.com"}).apply_to document
-          document.url_options.should == {host: "bar.com"}
-        end
-
-        it "applies transformation callbacks" do
-          before, after = double("before"), double("after")
-          Options.new(before_transformation: before, after_transformation: after).apply_to document
-          document.before_transformation.should == before
-          document.after_transformation.should == after
-        end
-
-        it "applies asset providers" do
-          providers = ProviderList.new [double]
-          Options.new(asset_providers: providers).apply_to document
-          document.asset_providers.should == providers
-        end
-      end
-
-      describe "merging" do
-        it "replaces options" do
-          options = Options.new(url_options: {host: "foo.com", port: 3000})
-          options.merge(url_options: {host: "bar.com", protocol: "https"}).url_options.should == {
-            host: "bar.com", protocol: "https"
-          }
-        end
-
-        it "does not mutate" do
-          options = Options.new(url_options: {})
-          options.merge url_options: {host: "foo.com"}
-          options.url_options.should == {}
+          describe "destructive combining" do
+            it "combines the old and the new value in the instance" do
+              options = Options.new(name => valid_value)
+              options.combine!(name => other_valid_value)
+              expect_combinated_value options.send(name)
+            end
+          end
         end
       end
 
-      describe "destructive merging" do
-        it "replaces options" do
-          options = Options.new(url_options: {host: "foo.com", port: 3000})
-          options.merge! url_options: {host: "bar.com", protocol: "https"}
-          options.url_options.should == {host: "bar.com", protocol: "https"}
+      it_behaves_like "attribute", :url_options do
+        let(:valid_value) { {host: "foo.com", port: 3000} }
+        let(:other_valid_value) { {host: "bar.com", scheme: "https"} }
+
+        def expect_combinated_value(value)
+          value.should == {host: "bar.com", port: 3000, scheme: "https"}
         end
       end
 
-      shared_examples_for "attribute combination" do
-        it "combines the url options" do
-          options = Options.new(url_options: {host: "foo.com", port: 3000})
-          combine(options, url_options: {host: "bar.com", protocol: "https"}).url_options.should == {
-            host: "bar.com", port: 3000, protocol: "https"
-          }
-        end
+      it_behaves_like "attribute", :before_transformation do
+        let(:valid_value) { Proc.new { } }
+        let(:other_valid_value) { Proc.new { } }
 
-        it "combines before callbacks" do
-          value = 0
-          inc = proc { value += 1 }
+        def expect_combinated_value(value)
+          valid_value.should_receive(:call).ordered.and_return 1
+          other_valid_value.should_receive(:call).ordered.and_return 2
 
-          options = Options.new(before_transformation: inc)
-          combined = combine(options, before_transformation: inc)
-
-          combined.before_transformation.call(0)
-          value.should == 2
-        end
-
-        it "combines after callbacks" do
-          value = 0
-          inc = proc { value += 1 }
-
-          options = Options.new(after_transformation: inc)
-          combined = combine(options, after_transformation: inc)
-
-          combined.after_transformation.call(0)
-          value.should == 2
-        end
-
-        it "combines asset providers" do
-          provider1 = double "Asset provider 1"
-          provider2 = double "Asset provider 2"
-          options = Options.new(asset_providers: [provider1])
-          combined = combine(options, asset_providers: [provider2])
-          combined.asset_providers.to_a.should == [provider1, provider2]
-        end
-
-        it "combines asset provider lists" do
-          provider1 = double "Asset provider 1"
-          provider2 = double "Asset provider 2"
-          options = Options.new(asset_providers: [provider1])
-          combined = combine(options, asset_providers: ProviderList.new([provider2]))
-          combined.asset_providers.to_a.should == [provider1, provider2]
-        end
-
-        it "appends singular asset providers" do
-          provider1 = double "Asset provider 1"
-          provider2 = double "Asset provider 2"
-          options = Options.new(asset_providers: [provider1])
-          combined = combine(options, asset_providers: provider2)
-          combined.asset_providers.to_a.should == [provider1, provider2]
+          value.call.should == 2
         end
       end
 
-      describe "combining" do
-        it_behaves_like "attribute combination"
+      it_behaves_like "attribute", :after_transformation do
+        let(:valid_value) { Proc.new { } }
+        let(:other_valid_value) { Proc.new { } }
 
-        def combine(instance, options)
-          instance.combine(options)
-        end
-
-        it "does not mutate" do
-          options = Options.new(url_options: {})
-          options.combine url_options: {host: "foo.com"}
-          options.url_options.should == {}
+        def expect_combinated_value(value)
+          valid_value.should_receive(:call).ordered.and_return 1
+          other_valid_value.should_receive(:call).ordered.and_return 2
+          value.call.should == 2
         end
       end
 
-      describe "desctructive combination" do
-        it_behaves_like "attribute combination"
+      it_behaves_like "attribute", :asset_providers do
+        let(:provider1) { double "Asset provider 1" }
+        let(:provider2) { double "Asset provider 2" }
 
-        def combine(instance, options)
-          instance.combine!(options)
-          instance
+        let(:valid_value) { ProviderList.new([provider1]) }
+        let(:other_valid_value) { ProviderList.new([provider2]) }
+
+        def expect_combinated_value(value)
+          value.should be_instance_of(ProviderList)
+          value.to_a.should == [provider1, provider2]
         end
+      end
 
-        it "mutates" do
-          options = Options.new(url_options: {})
-          options.combine! url_options: {host: "foo.com"}
-          options.url_options.should == {host: "foo.com"}
+      describe "asset_providers" do
+        it "automatically wraps values in a ProviderList" do
+          provider = double "Asset provider"
+          options = Options.new(asset_providers: [provider])
+          options.asset_providers.should be_instance_of(ProviderList)
+          options.asset_providers.to_a.should == [provider]
         end
       end
     end

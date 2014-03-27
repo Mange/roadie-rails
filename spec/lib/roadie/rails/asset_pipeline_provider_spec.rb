@@ -9,34 +9,38 @@ module Roadie
       it_behaves_like "roadie asset provider", valid_name: "existing.css", invalid_name: "bad.css" do
         subject { AssetPipelineProvider.new(pipeline) }
         before do
-          pipeline.add_asset "existing.css", ""
+          pipeline.add_asset "existing.css", "existing.css", ""
         end
       end
 
       describe "finding stylesheets" do
         it "searches the asset pipeline" do
-          pipeline.add_asset "/path/to/good.css.scss", "body { color: red; }"
+          pipeline.add_asset "good.css", "/path/to/good.css.scss", "body { color: red; }"
           provider = AssetPipelineProvider.new(pipeline)
 
           stylesheet = provider.find_stylesheet("good.css")
           stylesheet.name.should == "/path/to/good.css.scss (live compiled)"
           stylesheet.to_s.should == "body{color:red}"
         end
+
+        it "ignores query string and asset prefix" do
+          pipeline.add_asset "good.css", "good.css.scss", ""
+          provider = AssetPipelineProvider.new(pipeline)
+          provider.find_stylesheet("/assets/good.css?body=1").should_not be_nil
+        end
       end
 
       class FakePipeline
         # Interface
         def [](name)
-          @files.find { |file|
-            File.basename(file.pathname).index(name) == 0
-          }
+          @files.find { |file| file.matching_name == name }
         end
 
         # Test helpers
         def initialize() @files = [] end
-        def add_asset(name, content) @files << AssetFile.new(name, content) end
+        def add_asset(matching_name, path, content) @files << AssetFile.new(matching_name, path, content) end
         private
-        AssetFile = Struct.new(:pathname, :to_s)
+        AssetFile = Struct.new(:matching_name, :pathname, :to_s)
       end
     end
   end

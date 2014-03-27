@@ -8,12 +8,12 @@ describe "Integrations" do
   end
 
   [
-    RailsApp.new("Rails 3.0.x", 'rails_30'),
+    RailsApp.new("Rails 3.0.x", 'rails_30', runner: :script, asset_pipeline: false),
     ## We do not yet support live-compilation through asset pipeline
-    # RailsApp.new("Rails 3.1.x", 'rails_31'),
-    # RailsApp.new("Rails 3.2.x", 'rails_32'),
-    # RailsApp.new("Rails 4.0.x", 'rails_40', runner: :bin),
-    RailsApp.new("Rails 4.0.x (without asset pipeline)", 'rails_40_no_pipeline', runner: :bin),
+    RailsApp.new("Rails 3.1.x", 'rails_31', runner: :script, asset_pipeline: true),
+    RailsApp.new("Rails 3.2.x", 'rails_32', runner: :script, asset_pipeline: true),
+    RailsApp.new("Rails 4.0.x", 'rails_40', runner: :bin, asset_pipeline: true),
+    RailsApp.new("Rails 4.0.x (without asset pipeline)", 'rails_40_no_pipeline', runner: :bin, asset_pipeline: false),
   ].each do |app|
     describe "with #{app}" do
       before { app.reset }
@@ -33,24 +33,46 @@ describe "Integrations" do
 
         document = parse_html_in_email(email)
         document.should have_selector('body h1')
-        document.should have_styling('background' => 'url(https://example.app.org/images/rails.png)').at_selector('.image')
+        if app.using_asset_pipeline?
+          document.should have_styling('background' => 'url(https://example.app.org/assets/rails.png)').at_selector('.image')
+        else
+          document.should have_styling('background' => 'url(https://example.app.org/images/rails.png)').at_selector('.image')
+        end
 
         # If we deliver mails we can catch weird problems with headers being invalid
         email.delivery_method :test
         email.deliver
+      end
+
+      if app.using_asset_pipeline?
+        it "has a AssetPipelineProvider together with a FilesystemProvider" do
+          app.read_providers.should == %w[Roadie::FilesystemProvider Roadie::Rails::AssetPipelineProvider]
+        end
+      else
+        it "only has a FilesystemProvider" do
+          app.read_providers.should == ["Roadie::FilesystemProvider"]
+        end
       end
     end
   end
 
   describe "with precompiled assets" do
     let(:app) {
-      RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin)
+      RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin, asset_pipeline: false)
     }
 
     before { app.reset }
 
     let(:document) do
       parse_html_in_email app.read_email(:normal_email)
+    end
+
+    # It still has an AssetPipelineProvider in case some asset isn't
+    # precompiled, or the user want to combine. As long as the user is using
+    # the correct asset helpers a precompiled asset will be picked up by the
+    # FilesystemProvider.
+    it "has a AssetPipelineProvider together with a FilesystemProvider" do
+      app.read_providers.should == %w[Roadie::FilesystemProvider Roadie::Rails::AssetPipelineProvider]
     end
 
     it "inlines the precompiled stylesheet" do

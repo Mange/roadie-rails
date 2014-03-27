@@ -33,11 +33,13 @@ describe "Integrations" do
 
         document = parse_html_in_email(email)
         document.should have_selector('body h1')
+
         if app.using_asset_pipeline?
-          document.should have_styling('background' => 'url(https://example.app.org/assets/rails.png)').at_selector('.image')
+          expected_image_url = 'https://example.app.org/assets/rails.png'
         else
-          document.should have_styling('background' => 'url(https://example.app.org/images/rails.png)').at_selector('.image')
+          expected_image_url = 'https://example.app.org/images/rails.png'
         end
+        document.should have_styling('background' => "url(#{expected_image_url})").at_selector('.image')
 
         # If we deliver mails we can catch weird problems with headers being invalid
         email.delivery_method :test

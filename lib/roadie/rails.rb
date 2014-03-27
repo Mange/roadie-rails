@@ -14,5 +14,6 @@ require "roadie/rails/mail_inliner"
 require "roadie/rails/asset_pipeline_provider"
 
 require "roadie/rails/mailer"
+require "roadie/rails/automatic"
 
 require "roadie/rails/railtie"

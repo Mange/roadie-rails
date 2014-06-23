@@ -27,18 +27,16 @@ module Roadie
 
       describe "#mail" do
         let(:email) { Mail.new(to: "foo@example.com", from: "me@example.com") }
+        let(:roadie_options) { Options.new(url_options: {host: "somehost.com"}) }
         let(:instance) { some_mailer.new(email) }
 
-        before { instance.stub roadie_options: Options.new }
+        before { instance.stub roadie_options: roadie_options }
 
-        it "inlines the email when it is delivered" do
-          inliner = double "Inliner"
-          mail = instance.mail
-          mail.delivery_method :test
-
-          MailInliner.should_receive(:new).with(email, instance.roadie_options).and_return inliner
-          inliner.should_receive(:execute)
-          mail.deliver
+        it "extends the email with InlineOnDelivery and assigns roadie options" do
+          email = instance.mail
+          expect(email).to be_kind_of(InlineOnDelivery)
+          expect(email.roadie_options).not_to be_nil
+          expect(email.roadie_options.url_options).to eq roadie_options.url_options
         end
       end
     end

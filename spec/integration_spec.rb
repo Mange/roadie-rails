@@ -46,6 +46,34 @@ describe "Integrations" do
         email.deliver
       end
 
+      it "automatically inlines styles with automatic mailer" do
+        email = app.read_delivered_email(:normal_email)
+
+        email.to.should == ['example@example.org']
+        email.from.should == ['john@example.com']
+        email.should have(2).parts
+
+        email.text_part.body.decoded.should_not match(/<.*>/)
+
+        html = email.html_part.body.decoded
+        html.should include '<!DOCTYPE'
+        html.should include '<head'
+
+        document = parse_html_in_email(email)
+        document.should have_selector('body h1')
+
+        if app.using_asset_pipeline?
+          expected_image_url = 'https://example.app.org/assets/rails.png'
+        else
+          expected_image_url = 'https://example.app.org/images/rails.png'
+        end
+        document.should have_styling('background' => "url(#{expected_image_url})").at_selector('.image')
+
+        # If we deliver mails we can catch weird problems with headers being invalid
+        email.delivery_method :test
+        email.deliver
+      end
+
       if app.using_asset_pipeline?
         it "has a AssetPipelineProvider together with a FilesystemProvider" do
           app.read_providers.should == %w[Roadie::FilesystemProvider Roadie::Rails::AssetPipelineProvider]

@@ -45,7 +45,38 @@ email = NewsletterMailer.user_newsletter(User.first)
 email.deliver
 ```
 
-This way does not leave you with many options in case you want to selectively inline certain emails, or just in certain cases. If you need the extra flexibility, look at the "Manual usage" below.
+By overriding the `#roadie_options` method in the mailer you can disable inlining in certain cases:
+
+```ruby
+class NewsletterMailer < ActionMailer::Base
+  include Roadie::Rails::Automatic
+
+  private
+  def roadie_options
+    super unless Rails.env.test?
+  end
+end
+```
+
+Another way:
+
+```ruby
+describe YourMailer do
+  describe "email contents" do
+    before do
+      # Disable inlining
+      YourMailer.any_instance.stub(:roadie_options).and_return(nil)
+    end
+    # ...
+  end
+
+  describe "inlined email contents" do
+    # ...
+  end
+end
+```
+
+If you need the extra flexibility, look at the "Manual usage" below.
 
 ### Manual usage ###
 
@@ -108,7 +139,7 @@ describe YourMailer do
   describe "email contents" do
     before do
       # Redirect all roadie mail calls to the normal mail method
-      YourMailer.stub(:roadie_mail) { |*args, &block| YourMailer.mail(*args, &block) }
+      YourMailer.any_instance.stub(:roadie_mail) { |*args, &block| YourMailer.mail(*args, &block) }
     end
     # ...
   end

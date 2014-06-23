@@ -1,6 +1,6 @@
 rspec_options = {
-  cmd: 'rspec -f nested',
-  keep_failed: true,
+  cmd: 'rspec -f documentation',
+  fail_mode: :keep,
   all_after_pass: true,
   all_on_start: true,
   run_all: {cmd: 'rspec -f progress'}

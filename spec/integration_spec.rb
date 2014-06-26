@@ -14,6 +14,7 @@ describe "Integrations" do
     RailsApp.new("Rails 3.2.x", 'rails_32', runner: :script, asset_pipeline: true),
     RailsApp.new("Rails 4.0.x", 'rails_40', runner: :bin, asset_pipeline: true),
     RailsApp.new("Rails 4.0.x (without asset pipeline)", 'rails_40_no_pipeline', runner: :bin, asset_pipeline: false),
+    RailsApp.new("Rails 4.1.x", 'rails_41', runner: :bin, asset_pipeline: true),
   ].each do |app|
     describe "with #{app}" do
       before { app.reset }

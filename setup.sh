@@ -27,7 +27,7 @@ if [[ $1 == "install" ]]; then
   header "Installing gem dependencies"
   install
 
-  for app_path in $root/spec/railsapps/*; do
+  for app_path in $root/spec/railsapps/rails_*; do
     (
       cd $app_path
       header "Installing gems for $(basename $app_path)"
@@ -40,7 +40,7 @@ elif [[ $1 == "update" ]]; then
   header "Updating gem dependencies"
   update
 
-  for app_path in $root/spec/railsapps/*; do
+  for app_path in $root/spec/railsapps/rails_*; do
     (
       cd $app_path
       header "Updating $(basename $app_path)"

@@ -4,6 +4,12 @@ require 'spec_helper'
 module Roadie
   module Rails
     describe Options do
+      it "raises errors when constructed with unknown options" do
+        expect {
+          Options.new(unknown_option: "maybe a misspelling?")
+        }.to raise_error(ArgumentError, /unknown_option/)
+      end
+
       shared_examples_for "attribute" do |name|
         describe name do
           it "defaults to nil" do

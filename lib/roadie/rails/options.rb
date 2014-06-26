@@ -1,10 +1,14 @@
 module Roadie
   module Rails
     class Options
-      attr_reader :url_options, :before_transformation, :after_transformation, :asset_providers
+      private
+      ATTRIBUTE_NAMES = [:url_options, :before_transformation, :after_transformation, :asset_providers]
+
+      public
+      attr_reader *ATTRIBUTE_NAMES
 
       def initialize(options = {})
-        # TODO: Crash on unexpected keys
+        complain_about_unknown_keys options.keys
         self.url_options           = options[:url_options]
         self.before_transformation = options[:before_transformation]
         self.after_transformation  = options[:after_transformation]
@@ -83,6 +87,13 @@ module Roadie
           yield first, second
         else
           first ? first : second
+        end
+      end
+
+      def complain_about_unknown_keys(keys)
+        invalid_keys = keys - ATTRIBUTE_NAMES
+        if invalid_keys.size > 0
+          raise ArgumentError, "Unknown configuration parameters: #{invalid_keys}", caller(1)
         end
       end
     end

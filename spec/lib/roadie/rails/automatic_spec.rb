@@ -20,8 +20,8 @@ module Roadie
 
       describe "#roadie_options" do
         it "returns Rails' roadie config" do
-          ::Rails.stub_chain :application, :config, roadie: "roadie config"
-          some_mailer.new.roadie_options.should == "roadie config"
+          allow(::Rails).to receive_message_chain(:application, :config, :roadie).and_return "roadie config"
+          expect(some_mailer.new.roadie_options).to eq("roadie config")
         end
       end
 
@@ -30,7 +30,7 @@ module Roadie
         let(:roadie_options) { Options.new(url_options: {host: "somehost.com"}) }
         let(:instance) { some_mailer.new(email) }
 
-        before { instance.stub roadie_options: roadie_options }
+        before { allow(instance).to receive(:roadie_options).and_return roadie_options }
 
         it "extends the email with InlineOnDelivery and assigns roadie options" do
           email = instance.mail

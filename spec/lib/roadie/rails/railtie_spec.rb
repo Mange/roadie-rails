@@ -7,7 +7,8 @@ module Roadie
       let(:rails_application) { double "Application", config: ::Rails::Railtie::Configuration.new }
 
       before do
-        ::Rails.stub root: Pathname.new("rails-root"), application: rails_application
+        allow(::Rails).to receive(:root).and_return Pathname.new("rails-root")
+        allow(::Rails).to receive(:application).and_return rails_application
       end
 
       def run_initializer
@@ -22,24 +23,24 @@ module Roadie
         it "has filesystem providers to common asset paths" do
           run_initializer
           providers = Railtie.config.roadie.asset_providers.to_a
-          providers.should have(1).item
+          expect(providers).to have(1).item
 
-          providers[0].should be_instance_of(FilesystemProvider)
-          providers[0].path.should == "rails-root/public"
+          expect(providers[0]).to be_instance_of(FilesystemProvider)
+          expect(providers[0].path).to eq("rails-root/public")
         end
 
         it "also gets a AssetPipelineProvider if assets are enabled" do
           rails_application.config.assets = ActiveSupport::OrderedOptions.new(enabled: true)
 
           asset_pipeline = double "The asset pipeline"
-          rails_application.stub assets: asset_pipeline
+          allow(rails_application).to receive(:assets).and_return asset_pipeline
           run_initializer
 
           providers = Railtie.config.roadie.asset_providers.to_a
-          providers.should have(2).items
-          providers[0].should be_instance_of(FilesystemProvider)
-          providers[1].should be_instance_of(AssetPipelineProvider)
-          providers[1].pipeline.should == asset_pipeline
+          expect(providers).to have(2).items
+          expect(providers[0]).to be_instance_of(FilesystemProvider)
+          expect(providers[1]).to be_instance_of(AssetPipelineProvider)
+          expect(providers[1].pipeline).to eq(asset_pipeline)
         end
       end
     end

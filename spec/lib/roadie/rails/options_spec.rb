@@ -13,43 +13,43 @@ module Roadie
       shared_examples_for "attribute" do |name|
         describe name do
           it "defaults to nil" do
-            Options.new.send(name).should be_nil
+            expect(Options.new.send(name)).to be_nil
           end
 
           it "can be set in the constructor" do
-            Options.new(name => valid_value).send(name).should == valid_value
+            expect(Options.new(name => valid_value).send(name)).to eq(valid_value)
           end
 
           it "can be changed using setter" do
             options = Options.new
             options.send :"#{name}=", valid_value
-            options.send(name).should == valid_value
+            expect(options.send(name)).to eq(valid_value)
           end
 
           it "can be applied to documents" do
             fake_document = OpenStruct.new
             options = Options.new(name => valid_value)
             options.apply_to(fake_document)
-            fake_document.send(name).should == valid_value
+            expect(fake_document.send(name)).to eq(valid_value)
           end
 
           describe "merging" do
             it "replaces values" do
               options = Options.new(name => valid_value)
-              options.merge(name => other_valid_value).send(name).should == other_valid_value
+              expect(options.merge(name => other_valid_value).send(name)).to eq(other_valid_value)
             end
 
             it "does not mutate instance" do
               options = Options.new(name => valid_value)
               options.merge(name => other_valid_value)
-              options.send(name).should == valid_value
+              expect(options.send(name)).to eq(valid_value)
             end
           end
 
           describe "destructive merging" do
             it "replaces values" do
               options = Options.new(name => valid_value)
-              options.merge(name => other_valid_value).send(name).should == other_valid_value
+              expect(options.merge(name => other_valid_value).send(name)).to eq(other_valid_value)
             end
           end
 
@@ -63,7 +63,7 @@ module Roadie
             it "does not mutate instance" do
               options = Options.new(name => valid_value)
               options.combine(name => other_valid_value)
-              options.send(name).should == valid_value
+              expect(options.send(name)).to eq(valid_value)
             end
           end
 
@@ -82,7 +82,7 @@ module Roadie
         let(:other_valid_value) { {host: "bar.com", scheme: "https"} }
 
         def expect_combinated_value(value)
-          value.should == {host: "bar.com", port: 3000, scheme: "https"}
+          expect(value).to eq({host: "bar.com", port: 3000, scheme: "https"})
         end
       end
 
@@ -91,10 +91,10 @@ module Roadie
         let(:other_valid_value) { Proc.new { } }
 
         def expect_combinated_value(value)
-          valid_value.should_receive(:call).ordered.and_return 1
-          other_valid_value.should_receive(:call).ordered.and_return 2
+          expect(valid_value).to receive(:call).ordered.and_return 1
+          expect(other_valid_value).to receive(:call).ordered.and_return 2
 
-          value.call.should == 2
+          expect(value.call).to eq(2)
         end
       end
 
@@ -103,9 +103,9 @@ module Roadie
         let(:other_valid_value) { Proc.new { } }
 
         def expect_combinated_value(value)
-          valid_value.should_receive(:call).ordered.and_return 1
-          other_valid_value.should_receive(:call).ordered.and_return 2
-          value.call.should == 2
+          expect(valid_value).to receive(:call).ordered.and_return 1
+          expect(other_valid_value).to receive(:call).ordered.and_return 2
+          expect(value.call).to eq(2)
         end
       end
 
@@ -117,8 +117,8 @@ module Roadie
         let(:other_valid_value) { ProviderList.new([provider2]) }
 
         def expect_combinated_value(value)
-          value.should be_instance_of(ProviderList)
-          value.to_a.should == [provider1, provider2]
+          expect(value).to be_instance_of(ProviderList)
+          expect(value.to_a).to eq([provider1, provider2])
         end
       end
 
@@ -126,8 +126,8 @@ module Roadie
         it "automatically wraps values in a ProviderList" do
           provider = double "Asset provider"
           options = Options.new(asset_providers: [provider])
-          options.asset_providers.should be_instance_of(ProviderList)
-          options.asset_providers.to_a.should == [provider]
+          expect(options.asset_providers).to be_instance_of(ProviderList)
+          expect(options.asset_providers.to_a).to eq([provider])
         end
       end
     end

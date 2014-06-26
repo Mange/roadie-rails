@@ -11,8 +11,8 @@ module Roadie
 
       it "takes an email and options" do
         inliner = MailInliner.new(email, options)
-        inliner.email.should == email
-        inliner.options.should == options
+        expect(inliner.email).to eq(email)
+        expect(inliner.options).to eq(options)
       end
 
       context "with an plaintext email" do
@@ -23,9 +23,9 @@ module Roadie
         end
 
         it "returns the email without doing anything" do
-          inliner.execute.should == email
-          email.html_part.should be_nil
-          email.body.decoded.should == "Hello world"
+          expect(inliner.execute).to eq(email)
+          expect(email.html_part).to be_nil
+          expect(email.body.decoded).to eq("Hello world")
         end
       end
 
@@ -40,16 +40,16 @@ module Roadie
         end
 
         it "returns the email" do
-          inliner.execute.should == email
+          expect(inliner.execute).to eq(email)
         end
 
         it "adjusts the html part using Roadie" do
           document = double "A document", transform: "transformed HTML"
-          DocumentBuilder.should_receive(:build).with(html, instance_of(Options)).and_return document
+          expect(DocumentBuilder).to receive(:build).with(html, instance_of(Options)).and_return document
 
           inliner.execute
 
-          email.html_part.body.decoded.should == "transformed HTML"
+          expect(email.html_part.body.decoded).to eq("transformed HTML")
         end
       end
     end

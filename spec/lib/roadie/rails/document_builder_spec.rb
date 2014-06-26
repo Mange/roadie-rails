@@ -6,12 +6,12 @@ module Roadie
     describe DocumentBuilder do
       it "builds documents with the given HTML" do
         document = DocumentBuilder.build("foo", Options.new)
-        document.html.should == "foo"
+        expect(document.html).to eq("foo")
       end
 
       it "applies the options to the document" do
         options = Options.new
-        options.should_receive(:apply_to).with(instance_of Document).and_call_original
+        expect(options).to receive(:apply_to).with(instance_of Document).and_call_original
 
         DocumentBuilder.build("", options)
       end

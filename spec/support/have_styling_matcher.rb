@@ -1,24 +1,27 @@
 RSpec::Matchers.define :have_styling do |rules|
-  @selector = 'body > *:first'
   normalized_rules = StylingExpectation.new(rules)
 
   chain(:at_selector) { |selector| @selector = selector }
-  match { |document| normalized_rules == styles_at_selector(document) }
+
+  match { |document|
+    @selector ||= 'body > *:first'
+    normalized_rules == styles_at_selector(document)
+  }
 
   description {
     "have styles #{normalized_rules.inspect} at selector #{@selector.inspect}"
   }
 
-  failure_message_for_should { |document|
+  failure_message { |document|
     "expected styles at #{@selector.inspect} to be:\n#{normalized_rules}\nbut was:\n#{styles_at_selector(document)}"
   }
 
-  failure_message_for_should_not {
+  failure_message_when_negated {
     "expected styles at #{@selector.inspect} to not be:\n#{normalized_rules}"
   }
 
   def styles_at_selector(document)
-    document.should have_selector(@selector)
+    expect(document).to have_selector(@selector)
     style = document.at_css(@selector)['style']
     StylingExpectation.new(style || "")
   end

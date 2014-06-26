@@ -19,14 +19,14 @@ module Roadie
           provider = AssetPipelineProvider.new(pipeline)
 
           stylesheet = provider.find_stylesheet("good.css")
-          stylesheet.name.should == "/path/to/good.css.scss (live compiled)"
-          stylesheet.to_s.should == "body{color:red}"
+          expect(stylesheet.name).to eq("/path/to/good.css.scss (live compiled)")
+          expect(stylesheet.to_s).to eq("body{color:red}")
         end
 
         it "ignores query string and asset prefix" do
           pipeline.add_asset "good.css", "good.css.scss", ""
           provider = AssetPipelineProvider.new(pipeline)
-          provider.find_stylesheet("/assets/good.css?body=1").should_not be_nil
+          expect(provider.find_stylesheet("/assets/good.css?body=1")).not_to be_nil
         end
       end
 

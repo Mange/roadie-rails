@@ -54,6 +54,7 @@ class RailsApp
     IO.popen(<<-SH).read
       unset BUNDLE_GEMFILE;
       unset RUBYOPT;
+      export RAILS_ENV=development
       cd #{@path.shellescape} && #{runner_script} #{file_path.shellescape}
     SH
   end

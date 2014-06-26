@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require 'spec_helper'
+require 'ostruct'
 
 module Roadie
   module Rails

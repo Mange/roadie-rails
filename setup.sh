@@ -23,6 +23,9 @@ function install() {
 
 root=$(dirname $0)
 
+# Set by Travis CI; interferes with the nested repos
+unset BUNDLE_GEMFILE
+
 if [[ $1 == "install" ]]; then
   header "Installing gem dependencies"
   install

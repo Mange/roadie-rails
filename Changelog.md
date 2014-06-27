@@ -1,5 +1,9 @@
+### development version
+
+[full changelog](https://github.com/Mange/roadie/compare/v1.0.0.pre1...master)
+
 ### 1.0.0.pre1
 
-[full changelog](https://github.com/Mange/roadie/compare/0000000...master)
+[full changelog](https://github.com/Mange/roadie/compare/0000000...v1.0.0.pre1)
 
 * First implementation

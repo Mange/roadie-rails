@@ -6,6 +6,3 @@ gem 'roadie-rails', path: '../../../'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 end
-
-# Use git version of `roadie` until a full release have been made
-gem 'roadie', git: 'git://github.com/Mange/roadie.git', branch: 'master'

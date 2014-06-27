@@ -58,9 +58,6 @@ Then open up the `Gemfile` and add:
 
 ```ruby
 gem 'roadie-rails', :path => '../../..'
-
-# Use git version of `roadie` until a full release have been made
-gem 'roadie', git: 'git://github.com/Mange/roadie.git', branch: 'master'
 ```
 
 ## Add to integration_spec.rb

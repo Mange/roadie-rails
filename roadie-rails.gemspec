@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = %w[README.md Changelog.md LICENSE.txt]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "roadie", "~> 3.0.0.pre1"
+  spec.add_dependency "roadie", "~> 3.0"
   spec.add_dependency "rails", ">= 3.0", "< 4.2"
 
   spec.add_development_dependency "bundler", "~> 1.6"

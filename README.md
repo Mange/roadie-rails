@@ -8,10 +8,6 @@
 
 > Making HTML emails comfortable for the Rails rockstars.
 
-**Note:** You probably want to use [Roadie 2.4][roadie2] for your Rails application right now. Roadie 3 and roadie-rails have no stable releases yet.
-
----
-
 This gem hooks up your Rails application with Roadie to help you generate HTML emails.
 
 ## Installation ##
@@ -298,7 +294,7 @@ rake spec
 
 (The MIT License)
 
-Copyright © 2013
+Copyright © 2013-2014
 
 * [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>
 
@@ -311,7 +307,4 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 [roadie]: http://rubygems.org/gems/roadie
 [semver]: http://semver.org/
-[rdd]: http://tom.preston-werner.com/2010/08/23/readme-driven-development.html
 [gem]: http://rubygems.org/gems/roadie-rails
-
-[roadie2]: https://github.com/Mange/roadie/tree/2-4-stable

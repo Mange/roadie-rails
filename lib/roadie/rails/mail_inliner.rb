@@ -9,16 +9,21 @@ module Roadie
       end
 
       def execute
+        improve_body if email.content_type =~ /^text\/html/
         improve_html_part(email.html_part) if email.html_part
         email
       end
 
       private
-      def improve_html_part(html_part)
-        html_part.body = make_new_html(html_part.body.decoded)
+      def improve_body
+        email.body = transform_html(email.body.decoded)
       end
 
-      def make_new_html(old_html)
+      def improve_html_part(html_part)
+        html_part.body = transform_html(html_part.body.decoded)
+      end
+
+      def transform_html(old_html)
         DocumentBuilder.build(old_html, options).transform
       end
     end

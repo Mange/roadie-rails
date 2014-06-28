@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie/compare/v1.0.0...master)
 
-* Nothing yet
+* Bug fixes
+  * Inline HTML in emails without a plaintext part
 
 ### 1.0.0
 

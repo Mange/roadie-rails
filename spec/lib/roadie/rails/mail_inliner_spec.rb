@@ -29,6 +29,26 @@ module Roadie
         end
       end
 
+      context "with an HTML email" do
+        let(:html) { "<h1>Hello world!</h1>" }
+        let(:email) do
+          html_string = html
+          Mail.new do
+            content_type 'text/html; charset=UTF-8'
+            body html_string
+          end
+        end
+
+        it "adjusts the html part using Roadie" do
+          document = double "A document", transform: "transformed HTML"
+          expect(DocumentBuilder).to receive(:build).with(html, instance_of(Options)).and_return document
+
+          inliner.execute
+
+          expect(email.body.decoded).to eq("transformed HTML")
+        end
+      end
+
       context "with an multipart email" do
         let(:html) { "<h1>Hello world!</h1>" }
         let(:email) do

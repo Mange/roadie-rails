@@ -49,7 +49,7 @@ end
 ```
 
 
-** After:**
+**After:**
 
 ```erb
 <head>

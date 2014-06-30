@@ -1,14 +1,7 @@
 module Roadie
   module Rails
     class DocumentBuilder
-      class << self
-        def build(html, options)
-          new.build(html, options)
-        end
-        private :new
-      end
-
-      def build(html, options)
+      def self.build(html, options)
         document = Document.new(html)
         options.apply_to document
         document

@@ -9,8 +9,10 @@ module Roadie
       end
 
       def execute
-        improve_body if email.content_type =~ /^text\/html/
-        improve_html_part(email.html_part) if email.html_part
+        if options
+          improve_body if email.content_type =~ /^text\/html/
+          improve_html_part(email.html_part) if email.html_part
+        end
         email
       end
 

@@ -27,6 +27,11 @@ module Roadie
           expect(email.html_part).to be_nil
           expect(email.body.decoded).to eq("Hello world")
         end
+
+        it "does nothing when given nil options" do
+          inliner = MailInliner.new(email, nil)
+          expect { inliner.execute }.to_not raise_error
+        end
       end
 
       context "with an HTML email" do
@@ -46,6 +51,11 @@ module Roadie
           inliner.execute
 
           expect(email.body.decoded).to eq("transformed HTML")
+        end
+
+        it "does nothing when given nil options" do
+          inliner = MailInliner.new(email, nil)
+          expect { inliner.execute }.to_not raise_error
         end
       end
 
@@ -70,6 +80,11 @@ module Roadie
           inliner.execute
 
           expect(email.html_part.body.decoded).to eq("transformed HTML")
+        end
+
+        it "does nothing when given nil options" do
+          inliner = MailInliner.new(email, nil)
+          expect { inliner.execute }.to_not raise_error
         end
       end
     end

@@ -1,6 +1,10 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie/compare/v1.0.1...master)
+[full changelog](https://github.com/Mange/roadie/compare/v1.0.2...master)
+
+### 1.0.2
+
+[full changelog](https://github.com/Mange/roadie/compare/v1.0.1...v1.0.2)
 
 * Bug fixes
   * Don't crash on `nil` `roadie_options`

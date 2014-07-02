@@ -4,7 +4,7 @@ module Roadie
       def mail(*args, &block)
         super.tap do |email|
           email.extend InlineOnDelivery
-          email.roadie_options = roadie_options.dup
+          email.roadie_options = roadie_options.try(:dup)
         end
       end
 

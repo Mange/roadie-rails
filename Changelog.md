@@ -3,7 +3,7 @@
 [full changelog](https://github.com/Mange/roadie/compare/v1.0.1...master)
 
 * Bug fixes
-  * Don't crash on `nil` `roadie_options`.
+  * Don't crash on `nil` `roadie_options`
 
 ### 1.0.1
 

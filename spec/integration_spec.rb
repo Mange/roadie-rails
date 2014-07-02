@@ -75,6 +75,21 @@ describe "Integrations" do
         email.deliver
       end
 
+      it "inlines no styles when roadie_options are nil" do
+        email = app.read_delivered_email(:disabled_email)
+
+        expect(email.to).to eq(['example@example.org'])
+        expect(email.from).to eq(['john@example.com'])
+        expect(email).to have(2).parts
+
+        document = parse_html_in_email(email)
+        expect(document).to have_no_styling.at_selector('.image')
+
+        # If we deliver mails we can catch weird problems with headers being invalid
+        email.delivery_method :test
+        email.deliver
+      end
+
       if app.using_asset_pipeline?
         it "has a AssetPipelineProvider together with a FilesystemProvider" do
           expect(app.read_providers).to eq(%w[Roadie::FilesystemProvider Roadie::Rails::AssetPipelineProvider])

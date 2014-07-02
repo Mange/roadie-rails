@@ -4,14 +4,24 @@ class AutoMailer < ActionMailer::Base
   default from: 'john@example.com'
 
   def normal_email
-    mail(to: 'example@example.org', subject: "Notification for you") do |format|
-      format.html
-      format.text
-    end
+    generate_email
+  end
+
+  def disabled_email
+    generate_email
   end
 
   private
   def roadie_options
-    super.combine(url_options: {protocol: "https"})
+    unless action_name =~ /disabled/
+      super.combine(url_options: {protocol: "https"})
+    end
+  end
+
+  def generate_email
+    mail(to: 'example@example.org', subject: "Notification for you") do |format|
+      format.html { render :normal_email }
+      format.text { render :normal_email }
+    end
   end
 end

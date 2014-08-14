@@ -17,7 +17,15 @@ module Roadie
 
       private
       def normalize_asset_name(href)
-        File.basename href.split('?').first
+        remove_asset_prefix href.split('?').first
+      end
+
+      def remove_asset_prefix(path)
+        path.sub(Regexp.new("^#{Regexp.quote(asset_prefix)}/?"), "")
+      end
+
+      def asset_prefix
+        ::Rails.application.try(:config).try(:assets).try(:prefix) || "/assets"
       end
     end
   end

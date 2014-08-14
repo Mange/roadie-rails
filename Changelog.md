@@ -4,6 +4,7 @@
 
 * Bug fixes
   * Don't change `asset_providers` of a `Roadie::Document` when applying Options with no `asset_providers` set.
+  * Support assets inside subdirectories.
 
 ### 1.0.2
 

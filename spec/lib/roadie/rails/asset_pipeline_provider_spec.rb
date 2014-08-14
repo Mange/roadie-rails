@@ -28,6 +28,15 @@ module Roadie
           provider = AssetPipelineProvider.new(pipeline)
           expect(provider.find_stylesheet("/assets/good.css?body=1")).not_to be_nil
         end
+
+        it "supports stylesheets inside subdirectories" do
+          pipeline.add_asset "sub/deep.css", "/path/to/sub/deep.css.scss", "body { color: green; }"
+          provider = AssetPipelineProvider.new(pipeline)
+
+          stylesheet = provider.find_stylesheet("sub/deep.css")
+          expect(stylesheet.name).to eq("/path/to/sub/deep.css.scss (live compiled)")
+          expect(stylesheet.to_s).to eq("body{color:green}")
+        end
       end
 
       class FakePipeline

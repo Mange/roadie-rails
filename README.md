@@ -254,6 +254,23 @@ class Admin::EmailsController < AdminController
 end
 ```
 
+## Known issues ##
+
+Roadie will not be able to find your stylesheets if you have an `asset_host` configured and will ignore those lines when inlining.
+
+A workaround for this is to not use `asset_host` in your mailers:
+
+```ruby
+config.action_controller.asset_host = # ...
+config.action_mailer.asset_host = nil
+
+# or
+
+class MyMailer < ActionMailer::Base
+  self.asset_host = nil
+end
+```
+
 ## Build status ##
 
 Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of](http://travis-ci.org/#!/Mange/roadie-rails):

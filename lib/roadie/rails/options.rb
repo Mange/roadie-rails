@@ -37,7 +37,9 @@ module Roadie
         document.url_options = url_options
         document.before_transformation = before_transformation
         document.after_transformation = after_transformation
-        document.asset_providers = asset_providers
+        # #asset_providers default to nil in this class and it's the one option
+        # that is not allowed to be nil on Document.
+        document.asset_providers = asset_providers if asset_providers
       end
 
       def merge(options)
@@ -78,7 +80,7 @@ module Roadie
 
       def combine_providers(first, second)
         combine_nilable(first, second) do |a, b|
-          ProviderList.new a.to_a + Array.wrap(b)
+          ProviderList.new(a.to_a + Array.wrap(b))
         end
       end
 

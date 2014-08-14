@@ -131,6 +131,14 @@ module Roadie
           expect(options.asset_providers.to_a).to eq([provider])
         end
       end
+
+      describe "applying to a document" do
+        it "does not change the default asset_providers if option is never set" do
+          fake_document = OpenStruct.new(asset_providers: "original")
+          Options.new.apply_to(fake_document)
+          expect(fake_document.asset_providers).to eq("original")
+        end
+      end
     end
   end
 end

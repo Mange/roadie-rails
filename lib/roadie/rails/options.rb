@@ -30,6 +30,9 @@ module Roadie
       def asset_providers=(providers)
         if providers
           @asset_providers = ProviderList.wrap providers
+        # TODO: Raise an error when setting to nil in order to make this not a silent error.
+        # else
+        #   raise ArgumentError, "Cannot set asset_providers to nil. Set to Roadie::NullProvider if you want no external assets inlined."
         end
       end
 

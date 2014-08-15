@@ -6,6 +6,12 @@ module Roadie
     describe AssetPipelineProvider do
       let(:pipeline) { FakePipeline.new }
 
+      it "requires a passed pipeline" do
+        expect {
+          AssetPipelineProvider.new(nil)
+        }.to raise_error(ArgumentError)
+      end
+
       it_behaves_like "roadie asset provider", valid_name: "existing.css", invalid_name: "bad.css" do
         subject { AssetPipelineProvider.new(pipeline) }
         before do

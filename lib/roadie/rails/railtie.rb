@@ -13,7 +13,7 @@ module Roadie
         # Saying config.assets.enabled here does not work in Rails 3.1-3.2, but
         # APP.config.assets work. There is a difference between "config" and
         # "app.config" on those versions.
-        if app.config.respond_to?(:assets) && app.config.assets.enabled != false
+        if app.config.respond_to?(:assets) && app.config.assets.enabled != false && app.assets
           config.roadie.asset_providers << AssetPipelineProvider.new(app.assets)
         end
       end

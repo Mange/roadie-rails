@@ -5,6 +5,7 @@ module Roadie
       attr_reader :pipeline
 
       def initialize(pipeline)
+        raise ArgumentError, "You need to pass a pipeline to initialize AssetPipelineProvider" unless pipeline
         super()
         @pipeline = pipeline
       end

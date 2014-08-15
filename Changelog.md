@@ -5,6 +5,8 @@
 * Bug fixes
   * Don't change `asset_providers` of a `Roadie::Document` when applying Options with no `asset_providers` set.
   * Support assets inside subdirectories.
+  * Don't add `AssetPipelineProvider` when asset pipeline is unavailable (e.g. inside Rails engines).
+  * Raise error when initializing `AssetPipelineProvider` with `nil` provider.
 
 ### 1.0.2
 

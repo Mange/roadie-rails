@@ -247,8 +247,8 @@ class Admin::EmailsController < AdminController
   private
   def render_email(email)
     respond_to do |format|
-      format.html { render html: email.html_body.decoded }
-      format.text { render text: email.text_body.decoded }
+      format.html { render html: email.html_part.decoded }
+      format.text { render text: email.text_part.decoded }
     end
   end
 end

@@ -285,6 +285,7 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * 3.2
   * 4.0
   * 4.1
+  * 4.2
 
 Let me know if you want any other combination supported officially.
 

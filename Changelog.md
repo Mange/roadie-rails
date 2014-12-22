@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.3...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.4...master)
+
+* Nothing yet.
+
+### 1.0.4
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.3...v1.0.4)
 
 * Enhancements:
   * Support for Rails 4.2 — [Ryunosuke SATO (tricknotes)](https://github.com/tricknotes)

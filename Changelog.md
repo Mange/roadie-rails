@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.3...master)
 
-* Nothing yet
+* Enhancements:
+  * Support for Rails 4.2 — [Ryunosuke SATO (tricknotes)](https://github.com/tricknotes)
 
 ### 1.0.3
 

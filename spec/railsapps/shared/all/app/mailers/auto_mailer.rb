@@ -1,6 +1,10 @@
 class AutoMailer < ActionMailer::Base
   self.asset_host = 'http://asset.host.com'
 
+  # self.asset_host = Proc.new { |source|
+  #   'http://asset.host.com'
+  # }
+
   include Roadie::Rails::Automatic
 
   default from: 'john@example.com'

@@ -4,8 +4,10 @@ require 'mail'
 module Roadie
   module Rails
     describe Mailer do
-      base_mailer = Class.new do
+      some_mailer = Class.new do
         cattr_accessor :asset_host
+
+        include Mailer
 
         def initialize(email = nil)
           @email = email
@@ -14,10 +16,6 @@ module Roadie
         def mail(options = {})
           @email
         end
-      end
-
-      some_mailer = Class.new(base_mailer) do
-        include Mailer
       end
 
       describe "#roadie_options" do

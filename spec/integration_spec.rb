@@ -76,6 +76,29 @@ describe "Integrations" do
         email.deliver
       end
 
+      it "sets the proper host for images with automatic mailer" do
+        email = app.read_delivered_email(:asset_email)
+
+        html = email.html_part.body.decoded
+        expect(html).to include '<!DOCTYPE'
+        expect(html).to include '<head'
+        expect(html).to_not include '<link'
+
+        document = parse_html_in_email(email)
+        expect(document).to have_selector('body img')
+
+        if app.using_asset_pipeline?
+          expected_image_url = 'http://asset.host.com/assets/rails.png'
+        else
+          expected_image_url = 'http://asset.host.com/images/rails.png'
+        end
+        expect(document).to have_selector("img[src=\"#{expected_image_url}\"]")
+
+        # If we deliver mails we can catch weird problems with headers being invalid
+        email.delivery_method :test
+        email.deliver
+      end
+
       it "inlines no styles when roadie_options are nil" do
         email = app.read_delivered_email(:disabled_email)
 

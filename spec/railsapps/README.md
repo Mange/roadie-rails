@@ -29,7 +29,7 @@ cd rails_x_y
 
 The next step is of course specific to each Rails version. One of the easiest methods is to just start by deleting directories you know you have no use for, like `tmp`, `log` and `README.md`.
 
-```
+```bash
 rm -rf README.* tmp log db app/controllers app/helpers app/views/layouts public doc
 ```
 
@@ -39,11 +39,12 @@ After doing this, run `git add .` and inspect the list of added files. If there'
 
 ## Copy mailer and templates
 
-```
+```bash
 cd ..
-cp -r rails_40/app/mailers rails_x_y/app
-cp -r rails_40/app/views/*mailer rails_x_y/app/views
-cp -r rails_40/app/assets/* rails_x_y/app/assets
+rm -rf rails_x_y/app/assets rails_x_y/app/views
+ln -s ../../shared/pipeline/app/assets rails_x_y/app/assets
+ln -s ../../shared/all/app/mailers rails_x_y/app/mailers
+ln -s ../../shared/all/app/views rails_x_y/app/views
 ```
 
 ## Apply options and add gem
@@ -63,4 +64,3 @@ gem 'roadie-rails', :path => '../../..'
 ## Add to integration_spec.rb
 
 Add the information needed in `spec/integration_spec.rb` and run `setup.sh` before finally running the tests themselves. When everything's good, `git add` everything and commit.
-

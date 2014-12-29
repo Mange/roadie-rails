@@ -256,18 +256,13 @@ end
 
 ## Known issues ##
 
-Roadie will not be able to find your stylesheets if you have an `asset_host` configured and will ignore those lines when inlining.
-
-A workaround for this is to not use `asset_host` in your mailers:
+If you need to set an `asset_host` in your mailer, it must be done before `Roadie::Rails::Automatic` is `include`d. For example:
 
 ```ruby
-config.action_controller.asset_host = # ...
-config.action_mailer.asset_host = nil
-
-# or
-
 class MyMailer < ActionMailer::Base
-  self.asset_host = nil
+  self.asset_host = 'http://mail-cdn.mysite.com'
+
+  include Roadie::Rails::Automatic
 end
 ```
 

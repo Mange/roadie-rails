@@ -5,6 +5,8 @@ module Roadie
   module Rails
     describe Automatic do
       base_mailer = Class.new do
+        cattr_accessor :asset_host
+
         def initialize(email = nil)
           @email = email
         end
@@ -47,6 +49,20 @@ module Roadie
 
           expect(email).to be_kind_of(InlineOnDelivery)
           expect(email.roadie_options).to be_nil
+        end
+      end
+
+      describe "#asset_host" do
+        it "passes all arguments to the underlying simple accessor" do
+          string_host_mailer = Class.new(base_mailer) do
+            self.asset_host = 'http://original.com'
+
+            include Automatic
+          end
+
+          asset_host = string_host_mailer.asset_host
+          expect(asset_host).to be_a(Proc)
+          expect(asset_host.call('foo.png')).to eq('http://original.com')
         end
       end
     end

@@ -295,8 +295,8 @@ This project follows [Semantic Versioning][semver]. The 0.x branch is considered
 
 ## Documentation ##
 
-* [Online documentation for gem](http://rubydoc.info/gems/roadie-rails/frames)
-* [Online documentation for master](http://rubydoc.info/github/Mange/roadie-rails/master/frames)
+* [Online documentation for gem](https://www.omniref.com/ruby/gems/roadie-rails)
+* [Online documentation for master](https://www.omniref.com/github/Mange/roadie-rails)
 * [Changelog](https://github.com/Mange/roadie-rails/blob/master/Changelog.md)
 
 ## Running specs ##

@@ -12,7 +12,7 @@ module Roadie
 
       def find_stylesheet(name)
         if (asset = @pipeline[normalize_asset_name name])
-          Stylesheet.new("#{asset.pathname} (live compiled)", asset.to_s)
+          Stylesheet.new("#{asset.pathname} (live compiled)", asset.to_s.dup)
         end
       end
 

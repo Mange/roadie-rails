@@ -38,7 +38,7 @@ module Roadie
         it "ignores asset digest" do
           pipeline.add_asset "good.css", "good.css.scss", ""
           provider = AssetPipelineProvider.new(pipeline)
-          expect(provider.find_stylesheet("/assets/good-a1b605c3ff85456f0bf7bbbe3f59030a.css?body=1")).not_to be_nil
+          expect(provider.find_stylesheet("/assets/good-a1b605c3ff85456f0bf7bbbe3f59030a.css")).not_to be_nil
         end
 
         it "supports stylesheets inside subdirectories" do

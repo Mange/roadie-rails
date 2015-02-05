@@ -19,8 +19,7 @@ module Roadie
       private
       def normalize_asset_name(href)
         res = remove_asset_prefix href.split('?').first
-        res = remove_asset_digest res
-        res
+        remove_asset_digest res
       end
 
       def remove_asset_digest(path)

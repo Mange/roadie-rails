@@ -24,7 +24,7 @@ module Roadie
       end
 
       def remove_asset_digest(path)
-        path.gsub /-[a-z0-9]{32}/, ''
+        path.gsub /-[a-z0-9]{32}\./, '.'
       end
 
       def remove_asset_prefix(path)

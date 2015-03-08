@@ -41,6 +41,12 @@ module Roadie
           expect(provider.find_stylesheet("/assets/good-a1b605c3ff85456f0bf7bbbe3f59030a.css")).not_to be_nil
         end
 
+        it "will still find assets actually named with a hash at the end" do
+          pipeline.add_asset "vendor-a1b605c3ff85456f0bf7bbbe3f59030a.css", "vendor-a1b605c3ff85456f0bf7bbbe3f59030a.css", ""
+          provider = AssetPipelineProvider.new(pipeline)
+          expect(provider.find_stylesheet("/assets/vendor-a1b605c3ff85456f0bf7bbbe3f59030a.css")).not_to be_nil
+        end
+
         it "supports stylesheets inside subdirectories" do
           pipeline.add_asset "sub/deep.css", "/path/to/sub/deep.css.scss", "body { color: green; }"
           provider = AssetPipelineProvider.new(pipeline)

@@ -11,19 +11,23 @@ module Roadie
       end
 
       def find_stylesheet(name)
-        if (asset = @pipeline[normalize_asset_name name])
+        if (asset = find_asset_in_pipeline(name))
           Stylesheet.new("#{asset.pathname} (live compiled)", asset.to_s)
         end
       end
 
       private
+      def find_asset_in_pipeline(name)
+        normalized_name = normalize_asset_name(name)
+        @pipeline[normalized_name] || @pipeline[remove_asset_digest(normalized_name)]
+      end
+
       def normalize_asset_name(href)
-        res = remove_asset_prefix href.split('?').first
-        remove_asset_digest res
+        remove_asset_prefix(href.split('?').first)
       end
 
       def remove_asset_digest(path)
-        path.gsub /-[a-z0-9]{32}\./, '.'
+        path.gsub(/-[a-z0-9]{32}\./, '.')
       end
 
       def remove_asset_prefix(path)

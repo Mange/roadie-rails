@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.4...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.5...master)
+
+* Nothing yet.
+
+### 1.0.5
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.4...v1.0.5)
 
 * Enhancements:
   * Remove dependency on `rails` in favor of `railties` — [Mark J. Titorenko (mjtko)](https://github.com/mjtko)

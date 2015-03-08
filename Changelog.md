@@ -2,7 +2,11 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.4...master)
 
-* Nothing yet.
+* Enhancements:
+  * Remove dependency on `rails` in favor of `railties` — [Mark J. Titorenko (mjtko)](https://github.com/mjtko)
+* Bug fixes:
+  * Support for Rails 4.2 default configuration — [Tomas Celizna (tomasc)](https://github.com/tomasc)
+    * It's possible to inline assets with a digest (hash at the end of the filename), which is how Rails 4.2 defaults to, even when assets are not stored on disk.
 
 ### 1.0.4
 

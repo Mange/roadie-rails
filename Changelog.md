@@ -1,6 +1,10 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.5...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.6...master)
+
+### 1.0.6
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.5...v1.0.6)
 
 * Bug fixes:
   * Support Sprockets 3's new hash length (#41)

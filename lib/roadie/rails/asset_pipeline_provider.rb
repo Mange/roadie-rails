@@ -26,8 +26,17 @@ module Roadie
         remove_asset_prefix(href.split('?').first)
       end
 
+      DIGEST_PATTERN = /
+        -                # Digest comes after a dash
+        (?:
+         [a-z0-9]{32} |  # Old style is 32 character hash
+         [a-z0-9]{64}    # New style is 64 characters
+        )
+        \.               # Dot for the file extension
+      /x.freeze
+
       def remove_asset_digest(path)
-        path.gsub(/-[a-z0-9]{32}\./, '.')
+        path.gsub(DIGEST_PATTERN, '.')
       end
 
       def remove_asset_prefix(path)

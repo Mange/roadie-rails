@@ -38,7 +38,10 @@ module Roadie
         it "ignores asset digest" do
           pipeline.add_asset "good.css", "good.css.scss", ""
           provider = AssetPipelineProvider.new(pipeline)
+          # Old digest length
           expect(provider.find_stylesheet("/assets/good-a1b605c3ff85456f0bf7bbbe3f59030a.css")).not_to be_nil
+          # New digest length
+          expect(provider.find_stylesheet("/assets/good-00acbfe0213dff8c5ba7232e3dabb3584c9e216bdb489f69d7aa20e0e101f3e6.css")).not_to be_nil
         end
 
         it "will still find assets actually named with a hash at the end" do

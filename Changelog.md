@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.5...master)
 
-* Nothing yet.
+* Bug fixes:
+  * Support Sprockets 3's new hash length (#41)
 
 ### 1.0.5
 

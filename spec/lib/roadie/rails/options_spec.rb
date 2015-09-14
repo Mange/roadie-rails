@@ -66,6 +66,12 @@ module Roadie
               options.combine(name => other_valid_value)
               expect(options.send(name)).to eq(valid_value)
             end
+
+            it "does not touch initial value if no new value is passed" do
+              options = Options.new(name => valid_value)
+              combined = options.combine({})
+              expect(combined.send(name)).to eq(valid_value)
+            end
           end
 
           describe "destructive combining" do
@@ -84,6 +90,15 @@ module Roadie
 
         def expect_combinated_value(value)
           expect(value).to eq({host: "bar.com", port: 3000, scheme: "https"})
+        end
+      end
+
+      it_behaves_like "attribute", :keep_uninlinable_css do
+        let(:valid_value) { true }
+        let(:other_valid_value) { false }
+
+        def expect_combinated_value(value)
+          expect(value).to eq other_valid_value
         end
       end
 

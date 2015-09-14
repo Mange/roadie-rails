@@ -5,18 +5,19 @@ module Roadie
         :after_transformation,
         :asset_providers,
         :before_transformation,
+        :keep_uninlinable_css,
         :url_options,
       ]
       private_constant :ATTRIBUTE_NAMES
-
-      attr_reader *ATTRIBUTE_NAMES
+      attr_reader(*ATTRIBUTE_NAMES)
 
       def initialize(options = {})
         complain_about_unknown_keys options.keys
-        self.url_options           = options[:url_options]
-        self.before_transformation = options[:before_transformation]
         self.after_transformation  = options[:after_transformation]
         self.asset_providers       = options[:asset_providers]
+        self.before_transformation = options[:before_transformation]
+        self.keep_uninlinable_css  = options[:keep_uninlinable_css]
+        self.url_options           = options[:url_options]
       end
 
       def url_options=(options)
@@ -29,6 +30,10 @@ module Roadie
 
       def after_transformation=(callback)
         @after_transformation = callback
+      end
+
+      def keep_uninlinable_css=(bool)
+        @keep_uninlinable_css = bool
       end
 
       def asset_providers=(providers)
@@ -47,6 +52,7 @@ module Roadie
         # #asset_providers default to nil in this class and it's the one option
         # that is not allowed to be nil on Document.
         document.asset_providers = asset_providers if asset_providers
+        document.keep_uninlinable_css = keep_uninlinable_css unless keep_uninlinable_css.nil?
       end
 
       def merge(options)
@@ -54,7 +60,7 @@ module Roadie
       end
 
       def merge!(options)
-        [:url_options, :before_transformation, :after_transformation, :asset_providers].each do |attribute|
+        ATTRIBUTE_NAMES.each do |attribute|
           send "#{attribute}=", options.fetch(attribute, send(attribute))
         end
         self
@@ -65,10 +71,25 @@ module Roadie
       end
 
       def combine!(options)
-        self.url_options = combine_hash url_options, options[:url_options]
-        self.before_transformation = combine_callable before_transformation, options[:before_transformation]
-        self.after_transformation = combine_callable after_transformation, options[:after_transformation]
-        self.asset_providers = combine_providers asset_providers, options[:asset_providers]
+        self.after_transformation = combine_callable(
+          after_transformation, options[:after_transformation]
+        )
+
+        self.asset_providers = combine_providers(
+          asset_providers, options[:asset_providers]
+        )
+
+        self.before_transformation = combine_callable(
+          before_transformation, options[:before_transformation]
+        )
+
+        self.keep_uninlinable_css =
+          options[:keep_uninlinable_css] if options.has_key?(:keep_uninlinable_css)
+
+        self.url_options = combine_hash(
+          url_options, options[:url_options]
+        )
+
         self
       end
 

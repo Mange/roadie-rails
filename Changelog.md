@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.6...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0.rc1...master)
+
+### 1.1.0.rc1
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.6...v1.1.0.rc1)
+
+* Add support for `roadie`'s `keep_uninlinable_css` option.
 
 ### 1.0.6
 

@@ -15,7 +15,7 @@ This gem hooks up your Rails application with Roadie to help you generate HTML e
 [Add this gem to your Gemfile as recommended by Rubygems][gem] and run `bundle install`.
 
 ```ruby
-gem 'roadie-rails', '~> x.y.0'
+gem 'roadie-rails', '~> 3.1'
 ```
 
 ## Usage ##
@@ -277,8 +277,11 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
 
 * Ruby:
   * MRI 1.9.3
-  * MRI 2.0.0
-  * MRI 2.1.0
+  * MRI 2.0
+  * MRI 2.1
+  * MRI 2.2
+  * JRuby (latest)
+  * Rubinius (experimental)
 * Rails
   * 3.0
   * 3.1
@@ -291,7 +294,7 @@ Let me know if you want any other combination supported officially.
 
 ### Versioning ###
 
-This project follows [Semantic Versioning][semver]. The 0.x branch is considered unstable.
+This project follows [Semantic Versioning][semver].
 
 ## Documentation ##
 
@@ -312,7 +315,7 @@ rake spec
 
 (The MIT License)
 
-Copyright © 2013-2014
+Copyright © 2013-2015
 
 * [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>
 

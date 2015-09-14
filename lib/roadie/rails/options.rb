@@ -1,10 +1,14 @@
 module Roadie
   module Rails
     class Options
-      private
-      ATTRIBUTE_NAMES = [:url_options, :before_transformation, :after_transformation, :asset_providers]
+      ATTRIBUTE_NAMES = [
+        :after_transformation,
+        :asset_providers,
+        :before_transformation,
+        :url_options,
+      ]
+      private_constant :ATTRIBUTE_NAMES
 
-      public
       attr_reader *ATTRIBUTE_NAMES
 
       def initialize(options = {})

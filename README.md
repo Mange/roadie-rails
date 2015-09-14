@@ -15,7 +15,7 @@ This gem hooks up your Rails application with Roadie to help you generate HTML e
 [Add this gem to your Gemfile as recommended by Rubygems][gem] and run `bundle install`.
 
 ```ruby
-gem 'roadie-rails', '~> 3.1'
+gem 'roadie-rails', '~> 1.0'
 ```
 
 ## Usage ##

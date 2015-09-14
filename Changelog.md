@@ -2,6 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0.rc1...master)
 
+* Add support for `roadie`'s `external_asset_providers` option.
+
 ### 1.1.0.rc1
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.0.6...v1.1.0.rc1)

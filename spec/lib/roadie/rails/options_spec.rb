@@ -138,6 +138,19 @@ module Roadie
         end
       end
 
+      it_behaves_like "attribute", :external_asset_providers do
+        let(:provider1) { double "Asset provider 1" }
+        let(:provider2) { double "Asset provider 2" }
+
+        let(:valid_value) { ProviderList.new([provider1]) }
+        let(:other_valid_value) { ProviderList.new([provider2]) }
+
+        def expect_combinated_value(value)
+          expect(value).to be_instance_of(ProviderList)
+          expect(value.to_a).to eq([provider1, provider2])
+        end
+      end
+
       describe "asset_providers" do
         it "automatically wraps values in a ProviderList" do
           provider = double "Asset provider"

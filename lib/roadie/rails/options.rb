@@ -5,6 +5,7 @@ module Roadie
         :after_transformation,
         :asset_providers,
         :before_transformation,
+        :external_asset_providers,
         :keep_uninlinable_css,
         :url_options,
       ]
@@ -13,11 +14,12 @@ module Roadie
 
       def initialize(options = {})
         complain_about_unknown_keys options.keys
-        self.after_transformation  = options[:after_transformation]
-        self.asset_providers       = options[:asset_providers]
-        self.before_transformation = options[:before_transformation]
-        self.keep_uninlinable_css  = options[:keep_uninlinable_css]
-        self.url_options           = options[:url_options]
+        self.after_transformation     = options[:after_transformation]
+        self.asset_providers          = options[:asset_providers]
+        self.before_transformation    = options[:before_transformation]
+        self.external_asset_providers = options[:external_asset_providers]
+        self.keep_uninlinable_css     = options[:keep_uninlinable_css]
+        self.url_options              = options[:url_options]
       end
 
       def url_options=(options)
@@ -45,13 +47,23 @@ module Roadie
         end
       end
 
+      def external_asset_providers=(providers)
+        if providers
+          @external_asset_providers = ProviderList.wrap providers
+        # TODO: Raise an error when setting to nil in order to make this not a silent error.
+        # else
+        #   raise ArgumentError, "Cannot set asset_providers to nil. Set to Roadie::NullProvider if you want no external assets inlined."
+        end
+      end
+
       def apply_to(document)
         document.url_options = url_options
         document.before_transformation = before_transformation
         document.after_transformation = after_transformation
-        # #asset_providers default to nil in this class and it's the one option
-        # that is not allowed to be nil on Document.
+
         document.asset_providers = asset_providers if asset_providers
+        document.external_asset_providers = external_asset_providers if external_asset_providers
+
         document.keep_uninlinable_css = keep_uninlinable_css unless keep_uninlinable_css.nil?
       end
 
@@ -81,6 +93,10 @@ module Roadie
 
         self.before_transformation = combine_callable(
           before_transformation, options[:before_transformation]
+        )
+
+        self.external_asset_providers = combine_providers(
+          external_asset_providers, options[:external_asset_providers]
         )
 
         self.keep_uninlinable_css =

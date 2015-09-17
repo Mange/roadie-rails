@@ -2,6 +2,9 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0.rc2...master)
 
+* Bug fixes:
+  * Support for sprockets-rails 3 (#46)— [Rafael Mendonça França (rafaelfranca)](https://github.com/rafaelfranca)
+
 ### development version
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0.rc1...v1.1.0.rc2)

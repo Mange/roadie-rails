@@ -4,11 +4,15 @@ class RailsApp
     @path = File.expand_path("../../railsapps/#{path}", __FILE__)
     @runner = options.fetch(:runner)
     @using_asset_pipeline = options.fetch(:asset_pipeline)
+    @digests = options.fetch(:digests)
+    @sprockets3 = options[:sprockets3]
     reset
   end
 
   def to_s() @name end
   def using_asset_pipeline?() @using_asset_pipeline end
+  def digested?() @digests end
+  def sprockets3?() @sprockets3 end
 
   def read_email(mail_name)
     result = run("puts Mailer.#{mail_name}.to_s")

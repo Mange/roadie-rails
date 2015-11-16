@@ -20,8 +20,9 @@ class RailsApp
     Mail.read_from_string(result)
   end
 
-  def read_delivered_email(mail_name)
-    result = run("mail = AutoMailer.#{mail_name}; mail.delivery_method(:test); mail.deliver; puts mail.to_s")
+  def read_delivered_email(mail_name, options = {})
+    deliver = options[:force_delivery] ? "deliver!" : "deliver" 
+    result = run("mail = AutoMailer.#{mail_name}; mail.delivery_method(:test); mail.#{deliver}; puts mail.to_s")
     raise "No email returned. Did the rails application crash?" if result.strip.empty?
     Mail.read_from_string(result)
   end

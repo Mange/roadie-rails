@@ -7,10 +7,21 @@ module Roadie
       attr_accessor :roadie_options
 
       def deliver
+        inline_styles
+        super
+      end
+
+      def deliver!
+        inline_styles
+        super
+      end
+
+      private
+
+      def inline_styles
         if (options = roadie_options)
           MailInliner.new(self, options).execute
         end
-        super
       end
     end
   end

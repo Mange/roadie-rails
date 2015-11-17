@@ -3,7 +3,8 @@
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0.rc2...master)
 
 * Bug fixes:
-  * Support for sprockets-rails 3 (#46)— [Rafael Mendonça França (rafaelfranca)](https://github.com/rafaelfranca)
+  * Support for sprockets-rails 3 (#46) — [Rafael Mendonça França (rafaelfranca)](https://github.com/rafaelfranca)
+  * Support `Mailer#deliver!` in `AutomaticMailer` (#47) — [Julien Vanier (monkbroc)](https://github.com/monkbroc)
 
 ### development version
 

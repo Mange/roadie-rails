@@ -18,7 +18,7 @@ describe "Integrations" do
     RailsApp.new("Rails 4.1.x", 'rails_41', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.2.x", 'rails_42', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true),
-    RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: false),
+    RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true),
   ].each do |app|
     describe "with #{app}" do
       before { app.reset }

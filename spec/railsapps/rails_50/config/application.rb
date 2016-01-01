@@ -8,6 +8,6 @@ Bundler.require(*Rails.groups)
 
 module Rails50
   class Application < Rails::Application
-    config.roadie.url_options = {host: 'example.app.org'}
+    config.roadie.url_options = { host: 'example.app.org' }
   end
 end

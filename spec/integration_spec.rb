@@ -7,7 +7,7 @@ describe "Integrations" do
     Nokogiri::HTML.parse mail.html_part.body.decoded
   end
 
-  [
+  rails_apps = [
     RailsApp.new("Rails 3.0.x", 'rails_30', runner: :script, asset_pipeline: false, digests: false),
     ## We do not yet support live-compilation through asset pipeline
     RailsApp.new("Rails 3.1.x", 'rails_31', runner: :script, asset_pipeline: true, digests: false),
@@ -17,9 +17,15 @@ describe "Integrations" do
     RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin, asset_pipeline: true, digests: true),
     RailsApp.new("Rails 4.1.x", 'rails_41', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.2.x", 'rails_42', runner: :bin, asset_pipeline: true, digests: false),
-    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true),
-    RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true),
-  ].each do |app|
+    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true)
+  ]
+
+  # Rails 5 requires at least ruby version 2.2.2
+  if RUBY_VERSION >= "2.2.2"
+    rails_apps << RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true)
+  end
+
+  rails_apps.each do |app|
     describe "with #{app}" do
       before { app.reset }
 

@@ -13,6 +13,8 @@ Bundler.require(:default, Rails.env)
 
 module Rails40
   class Application < Rails::Application
+    config.assets.precompile += %w[email.css other.css]
+
     config.roadie.url_options = {host: 'example.app.org'}
   end
 end

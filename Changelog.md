@@ -2,7 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...master)
 
-* Nothing yet.
+* Also build on Ruby 2.3.0.
 
 ### 1.1.0
 

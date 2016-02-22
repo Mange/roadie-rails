@@ -280,8 +280,9 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * MRI 2.0
   * MRI 2.1
   * MRI 2.2
+  * MRI 2.3.0
   * JRuby (latest)
-  * Rubinius (experimental)
+  * Rubinius (failures on Rubinius will not fail the build due to a long history of instability in `rbx`)
 * Rails
   * 3.0
   * 3.1

@@ -1,8 +1,11 @@
 require "rspec/collection_matchers"
 
 if ENV['CI']
-  require 'coveralls'
-  Coveralls.wear!
+  require 'simplecov'
+  SimpleCov.start
+
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
 require 'roadie-rails'

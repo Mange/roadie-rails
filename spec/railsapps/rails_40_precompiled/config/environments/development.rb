@@ -9,6 +9,5 @@ Rails40::Application.configure do
   config.assets.debug = false
   config.assets.compile = false
   config.assets.digest = true
-  config.assets.precompile += %w[email.css other.css]
   config.assets.initialize_on_precompile = false
 end

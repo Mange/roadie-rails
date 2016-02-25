@@ -2,7 +2,7 @@
 
 [![Build history and status](https://secure.travis-ci.org/Mange/roadie-rails.png)](http://travis-ci.org/#!/Mange/roadie-rails)
 [![Code Climate](https://codeclimate.com/github/Mange/roadie-rails.png)](https://codeclimate.com/github/Mange/roadie-rails)
-[![Coverage Status](https://coveralls.io/repos/Mange/roadie-rails/badge.png?branch=master)](https://coveralls.io/r/Mange/roadie-rails?branch=master)
+[![Code coverage status](https://codecov.io/github/Mange/roadie-rails/coverage.svg?branch=master)](https://codecov.io/github/Mange/roadie-rails?branch=master)
 [![Gem Version](https://badge.fury.io/rb/roadie-rails.png)](http://badge.fury.io/rb/roadie-rails)
 [![Dependency Status](https://gemnasium.com/Mange/roadie-rails.png)](https://gemnasium.com/Mange/roadie-rails)
 
@@ -280,8 +280,9 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * MRI 2.0
   * MRI 2.1
   * MRI 2.2
+  * MRI 2.3.0
   * JRuby (latest)
-  * Rubinius (experimental)
+  * Rubinius (failures on Rubinius will not fail the build due to a long history of instability in `rbx`)
 * Rails
   * 3.0
   * 3.1
@@ -315,9 +316,7 @@ rake spec
 
 (The MIT License)
 
-Copyright © 2013-2015
-
-* [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>
+Copyright © 2013-2016 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

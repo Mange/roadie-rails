@@ -1,9 +1,15 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.1...master)
 
-* Also build on Ruby 2.3.0.
+* Nothing yet.
+
+### 1.1.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...v1.1.1)
+
 * Add support for Rails 5.0.
+* Also build on Ruby 2.3.0.
 
 ### 1.1.0
 

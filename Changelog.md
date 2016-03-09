@@ -8,7 +8,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...v1.1.1)
 
-* Add support for Rails 5.0.
+* Add support for Rails 5.0 (#50) — [Scott Ringwelski (sgringwe)](https://github.com/sgringwe)
 * Also build on Ruby 2.3.0.
 
 ### 1.1.0

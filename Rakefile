@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 
 desc "Install gems for embedded Rails apps"
 task :install_gems do
-  sh "./setup.sh install"
+  sh "./setup.sh install #{RUBY_VERSION}"
 end
 
 desc "Run specs"

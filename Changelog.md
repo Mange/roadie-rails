@@ -3,6 +3,7 @@
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...master)
 
 * Also build on Ruby 2.3.0.
+* Add support for Rails 5.0.
 
 ### 1.1.0
 

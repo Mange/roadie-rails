@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'rails', '>= 5.0.0.beta1', '< 5.1'
+gem 'sqlite3'
+gem 'sass-rails'
+gem 'sprockets-rails'
+
+gem 'roadie-rails', path: '../../..'

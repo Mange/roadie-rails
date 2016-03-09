@@ -290,6 +290,7 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * 4.0
   * 4.1
   * 4.2
+  * 5.0 (but only on Ruby 2.2+)
 
 Let me know if you want any other combination supported officially.
 
@@ -305,12 +306,13 @@ This project follows [Semantic Versioning][semver].
 
 ## Running specs ##
 
-Start by setting up your machine, then you can run the specs like normal:
+The default `rake` task will take care of the setup for you.
 
 ```bash
-./setup.sh install
-rake spec
+rake
 ```
+
+After running `rake` for the first time and you want to keep running tests without having to install all dependencies, you may run `guard`, `rspec` or `rake spec` depending on what you prefer.
 
 ## License ##
 

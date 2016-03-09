@@ -4,7 +4,7 @@
 
 * Nothing yet.
 
-### 1.1.0
+### 1.1.1
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.0...v1.1.1)
 

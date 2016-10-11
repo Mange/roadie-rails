@@ -17,12 +17,13 @@ describe "Integrations" do
     RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin, asset_pipeline: true, digests: true),
     RailsApp.new("Rails 4.1.x", 'rails_41', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.2.x", 'rails_42', runner: :bin, asset_pipeline: true, digests: false),
-    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true)
+    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
   ]
 
   # Rails 5 requires at least ruby version 2.2.2
-  if RUBY_VERSION >= "2.2.2"
-    rails_apps << RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets3: true)
+  if RUBY_VERSION >= "2.2.2" && !(RUBY_ENGINE == 'jruby' && RUBY_VERSION == '2.3.1')
+    rails_apps << RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
+    rails_apps << RailsApp.new("Rails 5.0.x (with sprockets 4)", 'rails_50_sprockets_4', runner: :bin, asset_pipeline: true, digests: true, sprockets: 4)
   end
 
   rails_apps.each do |app|
@@ -44,7 +45,7 @@ describe "Integrations" do
         expect(document).to have_selector('body h1')
 
         if app.digested?
-          if app.sprockets3?
+          if app.sprockets3_or_later?
             expected_image_url = 'https://example.app.org/assets/rails-322506f9917889126e81df2833a6eecdf2e394658d53dad347e9882dd4dbf28e.png'
           else
             expected_image_url = 'https://example.app.org/assets/rails-231a680f23887d9dd70710ea5efd3c62.png'

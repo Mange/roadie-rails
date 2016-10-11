@@ -2,7 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.1...master)
 
-* Nothing yet.
+* Sprockets 4.0 support (#60) - [Miklós Fazekas (mfazekas)](https://github.com/mfazekas)
 
 ### 1.1.1
 

@@ -2,7 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '>= 5.0', '< 5.1'
 gem 'sqlite3'
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0.6'
 gem 'sprockets-rails'
+gem 'sprockets', '>= 4.0.0.beta3'
 
 gem 'roadie-rails', path: '../../..'

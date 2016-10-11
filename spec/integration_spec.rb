@@ -8,23 +8,15 @@ describe "Integrations" do
   end
 
   rails_apps = [
-    RailsApp.new("Rails 3.0.x", 'rails_30', runner: :script, asset_pipeline: false, digests: false),
-    ## We do not yet support live-compilation through asset pipeline
-    RailsApp.new("Rails 3.1.x", 'rails_31', runner: :script, asset_pipeline: true, digests: false),
-    RailsApp.new("Rails 3.2.x", 'rails_32', runner: :script, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.0.x", 'rails_40', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.0.x (without asset pipeline)", 'rails_40_no_pipeline', runner: :bin, asset_pipeline: false, digests: false),
     RailsApp.new("Rails 4.0.x (precompiled)", 'rails_40_precompiled', runner: :bin, asset_pipeline: true, digests: true),
     RailsApp.new("Rails 4.1.x", 'rails_41', runner: :bin, asset_pipeline: true, digests: false),
     RailsApp.new("Rails 4.2.x", 'rails_42', runner: :bin, asset_pipeline: true, digests: false),
-    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
+    RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
+    RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
+    RailsApp.new("Rails 5.0.x (with sprockets 4)", 'rails_50_sprockets_4', runner: :bin, asset_pipeline: true, digests: true, sprockets: 4),
   ]
-
-  # Rails 5 requires at least ruby version 2.2.2
-  if RUBY_VERSION >= "2.2.2" && !(RUBY_ENGINE == 'jruby' && RUBY_VERSION == '2.3.1')
-    rails_apps << RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
-    rails_apps << RailsApp.new("Rails 5.0.x (with sprockets 4)", 'rails_50_sprockets_4', runner: :bin, asset_pipeline: true, digests: true, sprockets: 4)
-  end
 
   rails_apps.each do |app|
     describe "with #{app}" do

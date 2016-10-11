@@ -276,21 +276,13 @@ end
 Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of](http://travis-ci.org/#!/Mange/roadie-rails):
 
 * Ruby:
-  * MRI 1.9.3
-  * MRI 2.0
-  * MRI 2.1
-  * MRI 2.2
-  * MRI 2.3.0
-  * JRuby (latest)
-  * Rubinius (failures on Rubinius will not fail the build due to a long history of instability in `rbx`)
+  * MRI 2.2.5
+  * MRI 2.3
 * Rails
-  * 3.0
-  * 3.1
-  * 3.2
   * 4.0
   * 4.1
   * 4.2
-  * 5.0 (but only on Ruby 2.2+)
+  * 5.0
 
 Let me know if you want any other combination supported officially.
 

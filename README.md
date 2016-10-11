@@ -276,7 +276,7 @@ end
 Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of](http://travis-ci.org/#!/Mange/roadie-rails):
 
 * Ruby:
-  * MRI 2.2
+  * MRI 2.2.5
   * MRI 2.3
 * Rails
   * 4.0

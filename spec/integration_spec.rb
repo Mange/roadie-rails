@@ -23,7 +23,8 @@ describe "Integrations" do
   # Rails 5 requires at least ruby version 2.2.2
   if RUBY_VERSION >= "2.2.2" && !(RUBY_ENGINE == 'jruby' && RUBY_VERSION == '2.3.1')
     rails_apps << RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
-    rails_apps << RailsApp.new("Rails 5.0.x (with sprockets 4)", 'rails_50_sprockets_4', runner: :bin, asset_pipeline: true, digests: true, sprockets: 4)
+    # rails_apps << RailsApp.new("Rails 5.0.x (with sprockets 4)", 'rails_50_sprockets_4', runner: :bin, asset_pipeline: true, digests: true, sprockets: 4)
+    rails_apps << RailsApp.new("Rails 5.1.x", 'rails_51', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
   end
 
   rails_apps.each do |app|

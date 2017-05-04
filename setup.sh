@@ -14,11 +14,12 @@ function green() {
 }
 
 function update() {
+  bundle config --local path .bundle
   bundle update | grep -ve "^Using "
 }
 
 function install() {
-  bundle install --quiet && green "  OK"
+  bundle install --quiet --path=.bundle && green "  OK"
 }
 
 
@@ -37,13 +38,9 @@ if [[ $1 == "install" ]]; then
   for app_path in $root/spec/railsapps/rails_*; do
     (
       header "Rails app $(basename $app_path) with ruby $ruby_version"
-      if [[ $app_path == *rails_50* ]] && [[ $ruby_version != "2.2.2" ]] && [[ $ruby_version != "2.3.0" ]]; then
-        echo "Skipping installing gems for $(basename $app_path) because dependencies are not support for ruby version $ruby_version"
-      else
-        cd $app_path
-        echo "Installing gems for $(basename $app_path)"
-        install
-      fi
+      cd $app_path
+      echo "Installing gems for $(basename $app_path)"
+      install
     )
   done
   echo ""

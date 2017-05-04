@@ -38,6 +38,7 @@ class RailsApp
 
   def reset
     @extra_code = ""
+    run_in_app_context 'rm -rf tmp/cache'
   end
 
   def before_mail(code)
@@ -55,11 +56,13 @@ class RailsApp
   end
 
   def run_file_in_app_context(file_path)
+    run_in_app_context "#{runner_script} #{file_path.shellescape}"
+  end
+
+  def run_in_app_context(command)
     Bundler.with_clean_env do
       Dir.chdir @path do
-        IO.popen(<<-SH).read
-          #{runner_script} #{file_path.shellescape}
-        SH
+        IO.popen(command).read
       end
     end
   end

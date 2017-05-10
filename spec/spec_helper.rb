@@ -1,6 +1,7 @@
 require "rspec/collection_matchers"
 
-if ENV['CI']
+if ENV['CI'] &&
+    RUBY_ENGINE != 'rbx' # coverage is extremely slow on Rubinius
   require 'simplecov'
   SimpleCov.start
 

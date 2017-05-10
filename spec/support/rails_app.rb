@@ -21,7 +21,7 @@ class RailsApp
   end
 
   def read_delivered_email(mail_name, options = {})
-    deliver = options[:force_delivery] ? "deliver!" : "deliver" 
+    deliver = options[:force_delivery] ? "deliver!" : "deliver"
     result = run("mail = AutoMailer.#{mail_name}; mail.delivery_method(:test); mail.#{deliver}; puts mail.to_s")
     raise "No email returned. Did the rails application crash?" if result.strip.empty?
     Mail.read_from_string(result)
@@ -38,6 +38,7 @@ class RailsApp
 
   def reset
     @extra_code = ""
+    run_in_app_context 'rm -rf tmp/cache'
   end
 
   def before_mail(code)
@@ -55,13 +56,15 @@ class RailsApp
   end
 
   def run_file_in_app_context(file_path)
-    # Unset environment variables set by Bundler to get a clean slate
-    IO.popen(<<-SH).read
-      unset BUNDLE_GEMFILE;
-      unset RUBYOPT;
-      export RAILS_ENV=development
-      cd #{@path.shellescape} && #{runner_script} #{file_path.shellescape}
-    SH
+    run_in_app_context "#{runner_script} #{file_path.shellescape}"
+  end
+
+  def run_in_app_context(command)
+    Bundler.with_clean_env do
+      Dir.chdir @path do
+        IO.popen(command).read
+      end
+    end
   end
 
   def runner_script

@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.1...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.0...master)
+
+* Nothing yet.
+
+### 1.2.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.1...v1.2.0)
 
 **Note:** Support for Rails < 4.2 is now dropped.
 

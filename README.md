@@ -276,21 +276,15 @@ end
 Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of](http://travis-ci.org/#!/Mange/roadie-rails):
 
 * Ruby:
-  * MRI 1.9.3
-  * MRI 2.0
-  * MRI 2.1
   * MRI 2.2
-  * MRI 2.3.0
+  * MRI 2.3
+  * MRI 2.4
   * JRuby (latest)
-  * Rubinius (failures on Rubinius will not fail the build due to a long history of instability in `rbx`)
+  * Rubinius 3
 * Rails
-  * 3.0
-  * 3.1
-  * 3.2
-  * 4.0
-  * 4.1
   * 4.2
-  * 5.0 (but only on Ruby 2.2+)
+  * 5.0
+  * 5.1
 
 Let me know if you want any other combination supported officially.
 
@@ -318,7 +312,7 @@ After running `rake` for the first time and you want to keep running tests witho
 
 (The MIT License)
 
-Copyright © 2013-2016 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
+Copyright © 2013-2017 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

@@ -1,4 +1,4 @@
-Copyright (c) 2013-2016 Magnus Bergmark, and contributors.
+Copyright (c) 2013-2017 Magnus Bergmark, and contributors.
 
 MIT License
 

@@ -2,7 +2,12 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.1.1...master)
 
+**Note:** Support for Rails < 4.2 is now dropped.
+
+**Note:** Support for Ruby < 2.2 is now dropped.
+
 * Sprockets 4.0 support (#60) - [Miklós Fazekas (mfazekas)](https://github.com/mfazekas)
+* Rails 5.1 support (#70) - [Gleb Mazovetskiy (glebm)](https://github.com/glebm)
 
 ### 1.1.1
 

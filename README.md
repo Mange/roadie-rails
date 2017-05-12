@@ -256,7 +256,7 @@ end
 
 ## Known issues ##
 
-Roadie will not be able to find your stylesheets if you have an `asset_host` configured and will ignore those lines when inlining.
+Roadie will not be able to find your stylesheets if you have an `asset_host` configured and will ignore those lines when inlining. Also, make sure `config.assets.digest = false` is in your test.rb environment file.
 
 A workaround for this is to not use `asset_host` in your mailers:
 

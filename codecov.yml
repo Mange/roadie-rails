@@ -1,0 +1,3 @@
+ignore:
+  - ".bundle/**/*"
+  - "./spec/railsapps/*/.bundle/**/*"

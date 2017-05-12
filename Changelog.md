@@ -1,8 +1,16 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.1...master)
 
 * Nothing yet.
+
+### 1.2.1
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.0...v1.2.1)
+
+* Don't allow installation in Ruby < 2.2.
+* Fix install on Windows machines.
+* Less bloat in gem file, making it much smaller.
 
 ### 1.2.0
 

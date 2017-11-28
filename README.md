@@ -5,6 +5,7 @@
 [![Code coverage status](https://codecov.io/github/Mange/roadie-rails/coverage.svg?branch=master)](https://codecov.io/github/Mange/roadie-rails?branch=master)
 [![Gem Version](https://badge.fury.io/rb/roadie-rails.png)](http://badge.fury.io/rb/roadie-rails)
 [![Dependency Status](https://gemnasium.com/Mange/roadie-rails.png)](https://gemnasium.com/Mange/roadie-rails)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMange%2Froadie-rails.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMange%2Froadie-rails?ref=badge_shield)
 
 > Making HTML emails comfortable for the Rails rockstars.
 
@@ -322,3 +323,6 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 [roadie]: http://rubygems.org/gems/roadie
 [semver]: http://semver.org/
 [gem]: http://rubygems.org/gems/roadie-rails
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMange%2Froadie-rails.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMange%2Froadie-rails?ref=badge_large)

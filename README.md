@@ -279,8 +279,6 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * MRI 2.2
   * MRI 2.3
   * MRI 2.4
-  * JRuby (latest)
-  * Rubinius 3
 * Rails
   * 4.2
   * 5.0

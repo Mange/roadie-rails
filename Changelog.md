@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.1...master)
 
-* Nothing yet.
+* Dropped support for Rubunius and JRuby.
+  * They do not have many users and are a constant source of problems. If this is a problem for you, let me know and I might reconsider.
 
 ### 1.2.1
 

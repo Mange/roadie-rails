@@ -1,4 +1,6 @@
 class Mailer < ActionMailer::Base
+  self.asset_host = 'http://asset.host.com'
+
   include Roadie::Rails::Mailer
 
   default from: 'john@example.com'

@@ -5,6 +5,8 @@ module Roadie
   module Rails
     describe Automatic do
       base_mailer = Class.new do
+        cattr_accessor :asset_host
+
         def initialize(email = nil)
           @email = email
         end

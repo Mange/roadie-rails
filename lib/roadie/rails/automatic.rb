@@ -1,6 +1,12 @@
 module Roadie
   module Rails
     module Automatic
+      extend ActiveSupport::Concern
+
+      included do
+        include CssLocalizer
+      end
+
       def mail(*args, &block)
         super.tap do |email|
           email.extend InlineOnDelivery

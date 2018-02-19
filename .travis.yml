@@ -15,5 +15,6 @@ cache:
   - spec/railsapps/rails_42_sprockets_rails_3/.bundle
   - spec/railsapps/rails_50/.bundle
   - spec/railsapps/rails_51/.bundle
+  - spec/railsapps/rails_52/.bundle
 bundler_args: --without guard --path=.bundle
 script: "rake"

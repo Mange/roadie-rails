@@ -1,12 +1,27 @@
 sudo: false
 language: ruby
+
+bundler_args: --without guard --path=.bundle
+before_script: "./setup.sh install"
+script: "bundle exec rspec"
+
 rvm:
   - 2.2
   - 2.3
   - 2.4
 
+env:
+  - APP=rails_42
+  - APP=rails_42_sprockets_rails_3
+  - APP=rails_50
+  - APP=rails_51
+  - APP=rails_52
+
 matrix:
   fast_finish: true
+  include:
+    - rvm: 2.4
+      env: APP=rails_master
 
 cache:
   directories:
@@ -16,5 +31,4 @@ cache:
   - spec/railsapps/rails_50/.bundle
   - spec/railsapps/rails_51/.bundle
   - spec/railsapps/rails_52/.bundle
-bundler_args: --without guard --path=.bundle
-script: "rake"
+  - spec/railsapps/rails_master/.bundle

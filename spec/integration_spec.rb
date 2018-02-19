@@ -12,8 +12,13 @@ describe "Integrations" do
     RailsApp.new("Rails 4.2.x (with sprockets-rails 3)", 'rails_42_sprockets_rails_3', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
     RailsApp.new("Rails 5.0.x", 'rails_50', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
     RailsApp.new("Rails 5.1.0", 'rails_51', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
-    RailsApp.new("Rails 5.2.0", 'rails_52', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
+    RailsApp.new("Rails 5.2.0", 'rails_52', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3),
+    RailsApp.new("Rails master", 'rails_master', runner: :bin, asset_pipeline: true, digests: true, sprockets: 3)
   ]
+
+  if app = ENV['APP']
+    rails_apps.select! { |a| a.path == app }
+  end
 
   rails_apps.each do |app|
     describe "with #{app}" do

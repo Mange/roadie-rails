@@ -3,7 +3,12 @@ require "rspec/collection_matchers"
 if ENV['CI'] &&
     RUBY_ENGINE != 'rbx' # coverage is extremely slow on Rubinius
   require 'simplecov'
-  SimpleCov.start
+  SimpleCov.start do
+    # Only cover lib/. Omit spec/railsapps.
+    add_filter do |src|
+      src.filename !~ %r{/lib/roadie/rails}
+    end
+  end
 
   require 'codecov'
   SimpleCov.formatter = SimpleCov::Formatter::Codecov

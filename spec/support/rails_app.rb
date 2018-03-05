@@ -1,7 +1,9 @@
 class RailsApp
+  attr_reader :name, :path
+
   def initialize(name, path, options = {})
-    @name = name
-    @path = File.expand_path("../../railsapps/#{path}", __FILE__)
+    @name, @path = name, path
+    @full_path = File.expand_path("../../railsapps/#{path}", __FILE__)
     @runner = options.fetch(:runner)
     @using_asset_pipeline = options.fetch(:asset_pipeline)
     @digests = options.fetch(:digests)
@@ -61,7 +63,7 @@ class RailsApp
 
   def run_in_app_context(command)
     Bundler.with_clean_env do
-      Dir.chdir @path do
+      Dir.chdir @full_path do
         IO.popen(command).read
       end
     end

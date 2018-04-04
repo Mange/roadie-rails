@@ -3,9 +3,7 @@
 [![Build history and status](https://secure.travis-ci.org/Mange/roadie-rails.png)](http://travis-ci.org/#!/Mange/roadie-rails)
 [![Code Climate](https://codeclimate.com/github/Mange/roadie-rails.png)](https://codeclimate.com/github/Mange/roadie-rails)
 [![Code coverage status](https://codecov.io/github/Mange/roadie-rails/coverage.svg?branch=master)](https://codecov.io/github/Mange/roadie-rails?branch=master)
-[![Gem Version](https://badge.fury.io/rb/roadie-rails.png)](http://badge.fury.io/rb/roadie-rails)
-[![Dependency Status](https://gemnasium.com/Mange/roadie-rails.png)](https://gemnasium.com/Mange/roadie-rails)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMange%2Froadie-rails.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMange%2Froadie-rails?ref=badge_shield)
+[![Gem](https://img.shields.io/gem/v/roadie-rails.svg)](https://rubygems.org/gems/roadie-rails)
 
 > Making HTML emails comfortable for the Rails rockstars.
 
@@ -311,7 +309,7 @@ After running `rake` for the first time and you want to keep running tests witho
 
 (The MIT License)
 
-Copyright © 2013-2017 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
+Copyright © 2013-2018 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -323,6 +321,3 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 [roadie]: http://rubygems.org/gems/roadie
 [semver]: http://semver.org/
 [gem]: http://rubygems.org/gems/roadie-rails
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMange%2Froadie-rails.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FMange%2Froadie-rails?ref=badge_large)

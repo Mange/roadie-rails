@@ -4,6 +4,12 @@
 [![Code Climate](https://codeclimate.com/github/Mange/roadie-rails.png)](https://codeclimate.com/github/Mange/roadie-rails)
 [![Code coverage status](https://codecov.io/github/Mange/roadie-rails/coverage.svg?branch=master)](https://codecov.io/github/Mange/roadie-rails?branch=master)
 [![Gem](https://img.shields.io/gem/v/roadie-rails.svg)](https://rubygems.org/gems/roadie-rails)
+[![Passive maintenance](https://img.shields.io/badge/maintenance-Passive-yellow.svg)][passive]
+
+
+|||
+|---|---|
+| :warning: | This gem is now in [passive maintenance mode][passive] together with `roadie`. [(more)][passive] |
 
 > Making HTML emails comfortable for the Rails rockstars.
 
@@ -321,3 +327,4 @@ THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 [roadie]: http://rubygems.org/gems/roadie
 [semver]: http://semver.org/
 [gem]: http://rubygems.org/gems/roadie-rails
+[passive]: https://github.com/Mange/roadie/issues/155

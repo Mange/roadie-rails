@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.1...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.3.0...master)
+
+* Nothing yet.
+
+### 1.3.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.2.1...v1.3.0)
 
 * Dropped support for Rubunius and JRuby.
   * They do not have many users and are a constant source of problems. If this is a problem for you, let me know and I might reconsider.

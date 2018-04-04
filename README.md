@@ -20,7 +20,7 @@ This gem hooks up your Rails application with Roadie to help you generate HTML e
 [Add this gem to your Gemfile as recommended by Rubygems][gem] and run `bundle install`.
 
 ```ruby
-gem 'roadie-rails', '~> 1.0'
+gem 'roadie-rails', '~> 0.0'
 ```
 
 ## Usage ##
@@ -288,6 +288,7 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * 4.2
   * 5.0
   * 5.1
+  * 5.2
 
 Let me know if you want any other combination supported officially.
 

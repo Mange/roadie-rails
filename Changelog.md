@@ -2,7 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.3.0...master)
 
-* Nothing yet.
+* Add support for Ruby 2.5.
 
 ### 1.3.0
 

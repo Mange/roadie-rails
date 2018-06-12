@@ -5,6 +5,8 @@ module Roadie
   module Rails
     describe Mailer do
       some_mailer = Class.new do
+        cattr_accessor :asset_host
+
         include Mailer
 
         def initialize(email = nil)

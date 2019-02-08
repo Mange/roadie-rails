@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "bundler/gem_tasks"
 
 desc "Install gems for embedded Rails apps"
@@ -20,4 +22,4 @@ task :spec do
 end
 
 desc "Default: Update gems and run specs"
-task :default => [:update_gems, :spec]
+task default: %i[update_gems spec]

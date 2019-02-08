@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class AutoMailer < ActionMailer::Base
   include Roadie::Rails::Automatic
 
-  default from: 'john@example.com'
+  default from: "john@example.com"
 
   def normal_email
     generate_email
@@ -19,7 +21,7 @@ class AutoMailer < ActionMailer::Base
   end
 
   def generate_email
-    mail(to: 'example@example.org', subject: "Notification for you") do |format|
+    mail(to: "example@example.org", subject: "Notification for you") do |format|
       format.html { render :normal_email }
       format.text { render :normal_email }
     end

@@ -1,8 +1,10 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-gem 'rails', '~> 5.2.0.rc1'
-gem 'sass-rails'
-gem 'sprockets-rails'
-gem 'listen'
+source "https://rubygems.org"
 
-gem 'roadie-rails', path: '../../..'
+gem "rails", "~> 5.2.0.rc1"
+gem "sass-rails"
+gem "sprockets-rails"
+gem "listen"
+
+gem "roadie-rails", path: "../../.."

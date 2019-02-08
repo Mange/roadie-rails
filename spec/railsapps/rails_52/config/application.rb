@@ -1,9 +1,11 @@
-require_relative 'boot'
+# frozen_string_literal: true
 
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_view/railtie'
-require 'sprockets/railtie'
+require_relative "boot"
+
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,6 +13,6 @@ Bundler.require(*Rails.groups)
 
 module Rails52
   class Application < Rails::Application
-    config.roadie.url_options = { host: 'example.app.org' }
+    config.roadie.url_options = {host: "example.app.org"}
   end
 end

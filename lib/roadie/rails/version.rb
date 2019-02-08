@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
     VERSION = "1.3.0"

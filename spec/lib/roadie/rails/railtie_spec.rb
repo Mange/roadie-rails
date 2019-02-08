@@ -1,10 +1,13 @@
-# encoding: UTF-8
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 module Roadie
   module Rails
     describe Railtie do
-      let(:rails_application) { double "Application", config: ::Rails::Railtie::Configuration.new }
+      let(:rails_application) do
+        double("Application", config: ::Rails::Railtie::Configuration.new)
+      end
 
       before do
         allow(::Rails).to receive(:root).and_return Pathname.new("rails-root")
@@ -14,8 +17,8 @@ module Roadie
       def run_initializer
         # Hack to make the Railtie able to be initialized again
         # Railties are global state, after all, stored on the classes.
-        Railtie.instance_variable_set('@instance', nil) # Embrace me, Cthulhu!
-        Railtie.instance_variable_set('@ran', nil)
+        Railtie.instance_variable_set("@instance", nil) # Embrace me, Cthulhu!
+        Railtie.instance_variable_set("@ran", nil)
         Railtie.run_initializers :default, rails_application
       end
 

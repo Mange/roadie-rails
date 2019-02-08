@@ -1,5 +1,6 @@
-# encoding: UTF-8
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 module Roadie
   module Rails
@@ -11,9 +12,11 @@ module Roadie
 
       it "applies the options to the document" do
         options = Options.new
-        expect(options).to receive(:apply_to).with(instance_of Document).and_call_original
+        allow(options).to receive(:apply_to).and_call_original
 
         DocumentBuilder.build("", options)
+
+        expect(options).to have_received(:apply_to).with(instance_of(Document))
       end
     end
   end

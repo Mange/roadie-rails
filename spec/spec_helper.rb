@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require "rspec/collection_matchers"
 
-if ENV['CI'] &&
-    RUBY_ENGINE != 'rbx' # coverage is extremely slow on Rubinius
-  require 'simplecov'
+if ENV["CI"]
+  require "simplecov"
   SimpleCov.start do
     # Only cover lib/. Omit spec/railsapps.
     add_filter do |src|
@@ -10,14 +11,14 @@ if ENV['CI'] &&
     end
   end
 
-  require 'codecov'
+  require "codecov"
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
-require 'roadie-rails'
+require "roadie-rails"
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 end
 
-Dir['./spec/support/**/*.rb'].each { |file| require file }
+Dir["./spec/support/**/*.rb"].each { |file| require file }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RailsApp
   def initialize(name, path)
     @name = name
@@ -5,18 +7,36 @@ class RailsApp
     reset
   end
 
-  def to_s() @name end
+  def to_s
+    @name
+  end
 
   def read_email(mail_name)
     result = run("puts Mailer.#{mail_name}.to_s")
-    raise "No email returned. Did the rails application crash?" if result.strip.empty?
+
+    if result.strip.empty?
+      raise "No email returned. Did the rails application crash?"
+    end
+
     Mail.read_from_string(result)
   end
 
-  def read_delivered_email(mail_name, options = {})
+  def read_delivered_email( # rubocop:disable Metrics/MethodLength
+    mail_name,
+    options = {}
+  )
     deliver = options[:force_delivery] ? "deliver!" : "deliver"
-    result = run("mail = AutoMailer.#{mail_name}; mail.delivery_method(:test); mail.#{deliver}; puts mail.to_s")
-    raise "No email returned. Did the rails application crash?" if result.strip.empty?
+    result = run(<<~RUBY)
+      mail = AutoMailer.#{mail_name}
+      mail.delivery_method(:test)
+      mail.#{deliver}
+      puts mail.to_s
+    RUBY
+
+    if result.strip.empty?
+      raise "No email returned. Did the rails application crash?"
+    end
+
     Mail.read_from_string(result)
   end
 
@@ -26,12 +46,13 @@ class RailsApp
       puts providers.map { |p| p.class.name }.join(',')
     RUBY
     raise "No output present. Did the application crash?" if result.empty?
+
     result.split(",")
   end
 
   def reset
     @extra_code = ""
-    run_in_app_context 'rm -rf tmp/cache'
+    run_in_app_context "rm -rf tmp/cache"
   end
 
   def before_mail(code)
@@ -40,7 +61,7 @@ class RailsApp
 
   private
   def run(code)
-    Tempfile.open('code') do |file|
+    Tempfile.open("code") do |file|
       file << @extra_code unless @extra_code.empty?
       file << code
       file.close
@@ -60,4 +81,3 @@ class RailsApp
     end
   end
 end
-

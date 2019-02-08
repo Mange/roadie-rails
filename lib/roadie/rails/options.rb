@@ -1,58 +1,46 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
     class Options
-      ATTRIBUTE_NAMES = [
-        :after_transformation,
-        :asset_providers,
-        :before_transformation,
-        :external_asset_providers,
-        :keep_uninlinable_css,
-        :url_options,
-      ]
+      ATTRIBUTE_NAMES = %i[
+        after_transformation
+        asset_providers
+        before_transformation
+        external_asset_providers
+        keep_uninlinable_css
+        url_options
+      ].freeze
       private_constant :ATTRIBUTE_NAMES
+
       attr_reader(*ATTRIBUTE_NAMES)
+      attr_writer(
+        :url_options,
+        :before_transformation,
+        :after_transformation,
+        :keep_uninlinable_css,
+      )
 
       def initialize(options = {})
         complain_about_unknown_keys options.keys
-        self.after_transformation     = options[:after_transformation]
-        self.asset_providers          = options[:asset_providers]
-        self.before_transformation    = options[:before_transformation]
-        self.external_asset_providers = options[:external_asset_providers]
-        self.keep_uninlinable_css     = options[:keep_uninlinable_css]
-        self.url_options              = options[:url_options]
-      end
-
-      def url_options=(options)
-        @url_options = options
-      end
-
-      def before_transformation=(callback)
-        @before_transformation = callback
-      end
-
-      def after_transformation=(callback)
-        @after_transformation = callback
-      end
-
-      def keep_uninlinable_css=(bool)
-        @keep_uninlinable_css = bool
+        options.each_pair do |name, value|
+          self[name] = value
+        end
       end
 
       def asset_providers=(providers)
+        # TODO: Raise an error when setting to nil in order to make this not a
+        # silent error.
         if providers
           @asset_providers = ProviderList.wrap providers
-        # TODO: Raise an error when setting to nil in order to make this not a silent error.
-        # else
-        #   raise ArgumentError, "Cannot set asset_providers to nil. Set to Roadie::NullProvider if you want no external assets inlined."
         end
       end
 
       def external_asset_providers=(providers)
+        # TODO: Raise an error when setting to nil in order to make this not a
+        # silent error.
         if providers
           @external_asset_providers = ProviderList.wrap providers
-        # TODO: Raise an error when setting to nil in order to make this not a silent error.
-        # else
-        #   raise ArgumentError, "Cannot set asset_providers to nil. Set to Roadie::NullProvider if you want no external assets inlined."
         end
       end
 
@@ -62,9 +50,14 @@ module Roadie
         document.after_transformation = after_transformation
 
         document.asset_providers = asset_providers if asset_providers
-        document.external_asset_providers = external_asset_providers if external_asset_providers
 
-        document.keep_uninlinable_css = keep_uninlinable_css unless keep_uninlinable_css.nil?
+        if external_asset_providers
+          document.external_asset_providers = external_asset_providers
+        end
+
+        unless keep_uninlinable_css.nil?
+          document.keep_uninlinable_css = keep_uninlinable_css
+        end
       end
 
       def merge(options)
@@ -73,7 +66,7 @@ module Roadie
 
       def merge!(options)
         ATTRIBUTE_NAMES.each do |attribute|
-          send "#{attribute}=", options.fetch(attribute, send(attribute))
+          self[attribute] = options.fetch(attribute, self[attribute])
         end
         self
       end
@@ -82,64 +75,52 @@ module Roadie
         dup.combine! options
       end
 
-      def combine!(options)
-        self.after_transformation = combine_callable(
-          after_transformation, options[:after_transformation]
-        )
+      def combine!(options) # rubocop:disable Metrics/MethodLength
+        %i[after_transformation before_transformation].each do |name|
+          self[name] = Utils.combine_callable(self[name], options[name])
+        end
 
-        self.asset_providers = combine_providers(
-          asset_providers, options[:asset_providers]
-        )
+        %i[asset_providers external_asset_providers].each do |name|
+          self[name] = Utils.combine_providers(self[name], options[name])
+        end
 
-        self.before_transformation = combine_callable(
-          before_transformation, options[:before_transformation]
-        )
+        if options.key?(:keep_uninlinable_css)
+          self.keep_uninlinable_css = options[:keep_uninlinable_css]
+        end
 
-        self.external_asset_providers = combine_providers(
-          external_asset_providers, options[:external_asset_providers]
-        )
-
-        self.keep_uninlinable_css =
-          options[:keep_uninlinable_css] if options.has_key?(:keep_uninlinable_css)
-
-        self.url_options = combine_hash(
-          url_options, options[:url_options]
+        self.url_options = Utils.combine_hash(
+          url_options,
+          options[:url_options],
         )
 
         self
       end
 
-      private
-      def combine_hash(first, second)
-        combine_nilable(first, second) do |a, b|
-          a.merge(b)
-        end
-      end
-
-      def combine_callable(first, second)
-        combine_nilable(first, second) do |a, b|
-          proc { |*args| a.call(*args); b.call(*args) }
-        end
-      end
-
-      def combine_providers(first, second)
-        combine_nilable(first, second) do |a, b|
-          ProviderList.new(a.to_a + Array.wrap(b))
-        end
-      end
-
-      def combine_nilable(first, second)
-        if first && second
-          yield first, second
+      def [](option)
+        if ATTRIBUTE_NAMES.include?(option)
+          public_send(option)
         else
-          first ? first : second
+          raise ArgumentError, "#{option.inspect} is not a valid option"
         end
       end
 
+      def []=(option, value)
+        if ATTRIBUTE_NAMES.include?(option)
+          public_send("#{option}=", value)
+        else
+          raise ArgumentError, "#{option.inspect} is not a valid option"
+        end
+      end
+
+      private
       def complain_about_unknown_keys(keys)
         invalid_keys = keys - ATTRIBUTE_NAMES
-        if invalid_keys.size > 0
-          raise ArgumentError, "Unknown configuration parameters: #{invalid_keys}", caller(1)
+        unless invalid_keys.empty?
+          raise(
+            ArgumentError,
+            "Unknown configuration parameters: #{invalid_keys}",
+            caller(1),
+          )
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
   end
@@ -6,6 +8,7 @@ end
 require "roadie"
 
 require "roadie/rails/version"
+require "roadie/rails/utils"
 require "roadie/rails/options"
 
 require "roadie/rails/document_builder"

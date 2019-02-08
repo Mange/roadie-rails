@@ -1,0 +1,71 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - spec/railsapps/**/*
+
+Naming/FileName:
+  Exclude:
+    # This is named intentionally this way (the gem name), in case someone
+    # includes it instead of "roadie/rails".
+    - lib/roadie-rails.rb
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Style/Documentation:
+  Enabled: false
+
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: true
+  EnforcedStyle: braces_for_chaining
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  ExcludedMethods:
+    - refine
+    - describe
+    - context
+    - shared_examples
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/*_spec.rb'
+    - 'spec/**/*_spec.rb'
+    - 'spec/shared_examples/*.rb'
+
+Metrics/LineLength:
+  IgnoredPatterns:
+    - '^\s*it\s' # Test names can be long
+  Exclude:
+    - roadie-rails.gemspec

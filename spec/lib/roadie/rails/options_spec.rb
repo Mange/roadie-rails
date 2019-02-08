@@ -1,9 +1,10 @@
-# encoding: UTF-8
-require 'spec_helper'
-require 'ostruct'
+# frozen_string_literal: true
+
+require "spec_helper"
+require "ostruct"
 
 module Roadie
-  module Rails
+  module Rails # rubocop:disable Metrics/ModuleLength
     describe Options do
       it "raises errors when constructed with unknown options" do
         expect {
@@ -11,46 +12,61 @@ module Roadie
         }.to raise_error(ArgumentError, /unknown_option/)
       end
 
+      it "raises errors when setting or reading unknown options" do
+        options = Options.new
+        expect { options[:foo] }.to raise_error(ArgumentError, /foo/)
+        expect { options[:foo] = true }.to raise_error(ArgumentError, /foo/)
+      end
+
       shared_examples_for "attribute" do |name|
         describe name do
           it "defaults to nil" do
-            expect(Options.new.send(name)).to be_nil
+            expect(Options.new[name]).to be_nil
           end
 
           it "can be set in the constructor" do
-            expect(Options.new(name => valid_value).send(name)).to eq(valid_value)
+            options = Options.new(name => valid_value)
+            expect(options[name]).to eq(valid_value)
           end
 
           it "can be changed using setter" do
             options = Options.new
             options.send :"#{name}=", valid_value
-            expect(options.send(name)).to eq(valid_value)
+            expect(options[name]).to eq(valid_value)
+          end
+
+          it "can be changed using brackets" do
+            options = Options.new
+            options[name] = valid_value
+            expect(options[name]).to eq(valid_value)
           end
 
           it "can be applied to documents" do
             fake_document = OpenStruct.new
             options = Options.new(name => valid_value)
             options.apply_to(fake_document)
-            expect(fake_document.send(name)).to eq(valid_value)
+            expect(fake_document[name]).to eq(valid_value)
           end
 
           describe "merging" do
             it "replaces values" do
               options = Options.new(name => valid_value)
-              expect(options.merge(name => other_valid_value).send(name)).to eq(other_valid_value)
+              merged = options.merge(name => other_valid_value)
+              expect(merged[name]).to eq(other_valid_value)
             end
 
             it "does not mutate instance" do
               options = Options.new(name => valid_value)
               options.merge(name => other_valid_value)
-              expect(options.send(name)).to eq(valid_value)
+              expect(options[name]).to eq(valid_value)
             end
           end
 
           describe "destructive merging" do
             it "replaces values" do
               options = Options.new(name => valid_value)
-              expect(options.merge(name => other_valid_value).send(name)).to eq(other_valid_value)
+              merged = options.merge(name => other_valid_value)
+              expect(merged[name]).to eq(other_valid_value)
             end
           end
 
@@ -58,19 +74,19 @@ module Roadie
             it "combines the old and the new value" do
               options = Options.new(name => valid_value)
               combined = options.combine(name => other_valid_value)
-              expect_combinated_value combined.send(name)
+              expect_combinated_value(combined[name])
             end
 
             it "does not mutate instance" do
               options = Options.new(name => valid_value)
               options.combine(name => other_valid_value)
-              expect(options.send(name)).to eq(valid_value)
+              expect(options[name]).to eq(valid_value)
             end
 
             it "does not touch initial value if no new value is passed" do
               options = Options.new(name => valid_value)
               combined = options.combine({})
-              expect(combined.send(name)).to eq(valid_value)
+              expect(combined[name]).to eq(valid_value)
             end
           end
 
@@ -78,7 +94,7 @@ module Roadie
             it "combines the old and the new value in the instance" do
               options = Options.new(name => valid_value)
               options.combine!(name => other_valid_value)
-              expect_combinated_value options.send(name)
+              expect_combinated_value(options[name])
             end
           end
         end
@@ -89,7 +105,7 @@ module Roadie
         let(:other_valid_value) { {host: "bar.com", scheme: "https"} }
 
         def expect_combinated_value(value)
-          expect(value).to eq({host: "bar.com", port: 3000, scheme: "https"})
+          expect(value).to eq(host: "bar.com", port: 3000, scheme: "https")
         end
       end
 
@@ -103,25 +119,32 @@ module Roadie
       end
 
       it_behaves_like "attribute", :before_transformation do
-        let(:valid_value) { Proc.new { } }
-        let(:other_valid_value) { Proc.new { } }
+        let(:valid_value) { -> {} }
+        let(:other_valid_value) { -> {} }
 
-        def expect_combinated_value(value)
-          expect(valid_value).to receive(:call).ordered.and_return 1
-          expect(other_valid_value).to receive(:call).ordered.and_return 2
+        def expect_combinated_value(value) # rubocop:disable Metrics/AbcSize
+          allow(valid_value).to receive(:call).and_return 1
+          allow(other_valid_value).to receive(:call).and_return 2
 
           expect(value.call).to eq(2)
+
+          expect(valid_value).to have_received(:call).once.ordered
+          expect(other_valid_value).to have_received(:call).once.ordered
         end
       end
 
       it_behaves_like "attribute", :after_transformation do
-        let(:valid_value) { Proc.new { } }
-        let(:other_valid_value) { Proc.new { } }
+        let(:valid_value) { -> {} }
+        let(:other_valid_value) { -> {} }
 
-        def expect_combinated_value(value)
-          expect(valid_value).to receive(:call).ordered.and_return 1
-          expect(other_valid_value).to receive(:call).ordered.and_return 2
+        def expect_combinated_value(value) # rubocop:disable Metrics/AbcSize
+          allow(valid_value).to receive(:call).and_return 1
+          allow(other_valid_value).to receive(:call).and_return 2
+
           expect(value.call).to eq(2)
+
+          expect(valid_value).to have_received(:call).once.ordered
+          expect(other_valid_value).to have_received(:call).once.ordered
         end
       end
 

@@ -1,9 +1,9 @@
 module Roadie
   module Rails
     module Mailer
-      def roadie_mail(options = {}, custom_roadie_options = nil, &block)
+      def roadie_mail(options = {}, final_roadie_options = roadie_options, &block)
         email = mail(options, &block)
-        MailInliner.new(email, custom_roadie_options || roadie_options).execute
+        MailInliner.new(email, final_roadie_options).execute
       end
 
       def roadie_options

@@ -9,9 +9,6 @@ rvm:
 matrix:
   fast_finish: true
 
-before_install:
-  - gem install bundler # Need for Ruby 2.5: https://github.com/travis-ci/travis-ci/issues/9333
-
 cache:
   directories:
   - .bundle

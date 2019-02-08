@@ -1,9 +1,15 @@
 module Roadie
   module Rails
     module Mailer
-      def roadie_mail(options = {}, &block)
+      # Generate an email and run Roadie on it. Will use #roadie_options to get
+      # default options if not passed in.
+      def roadie_mail(
+        options = {},
+        final_roadie_options = roadie_options,
+        &block
+      )
         email = mail(options, &block)
-        MailInliner.new(email, roadie_options).execute
+        MailInliner.new(email, final_roadie_options).execute
       end
 
       def roadie_options

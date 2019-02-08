@@ -1,1 +1,0 @@
-Rails42::Application.config.secret_key_base = '4fc45a45fecece06ff370f3271d9c2f29cdd0b029bde255d77318418e5066681d42c706f5e504b9298f2b5ccbd2c013c39d474e6521ef4c4f056b1368ce22c8f'

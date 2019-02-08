@@ -2,7 +2,10 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v1.3.0...master)
 
+* Drop support for Ruby before 2.5.
+* Drop support for Rails before 5.1.
 * Add support for Ruby 2.5.
+* Add support for Ruby 2.6.
 * Fix arity of `Roadie::Rails::Mailer#roadie_mail` - [Adrian Lehmann (ownadi)](https://github.com/ownadi)
 
 ### 1.3.0

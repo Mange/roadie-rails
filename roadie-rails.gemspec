@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Hooks Roadie into your Rails application to help with email generation.}
   spec.license       = "MIT"
 
-  spec.required_ruby_version = ">= 2.2"
+  spec.required_ruby_version = ">= 2.5"
 
   spec.files         = `git ls-files | grep -v ^spec`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -22,11 +22,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "roadie", "~> 3.1"
-  spec.add_dependency "railties", ">= 3.0", "< 5.3"
+  spec.add_dependency "railties", ">= 5.1", "< 5.3"
 
-  spec.add_development_dependency "rails", ">= 4.2", "< 5.3"
-  spec.add_development_dependency "bundler", ">= 1.6"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rails", ">= 5.1", "< 5.3"
+  spec.add_development_dependency "bundler", "~> 2.0"
+  spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "rspec-collection_matchers"
 end

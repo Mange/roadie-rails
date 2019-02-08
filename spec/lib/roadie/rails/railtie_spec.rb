@@ -20,7 +20,7 @@ module Roadie
       end
 
       describe "asset providers" do
-        it "has filesystem providers to common asset paths" do
+        it "has filesystem providers to common asset paths if asset pipeline is disabled" do
           run_initializer
           providers = Railtie.config.roadie.asset_providers.to_a
           expect(providers).to have(1).item
@@ -30,7 +30,7 @@ module Roadie
         end
 
         it "also gets a AssetPipelineProvider if assets are enabled" do
-          rails_application.config.assets = ActiveSupport::OrderedOptions.new(enabled: true)
+          rails_application.config.assets = ActiveSupport::OrderedOptions.new
 
           asset_pipeline = double "The asset pipeline"
           allow(rails_application).to receive(:assets).and_return asset_pipeline
@@ -46,7 +46,7 @@ module Roadie
         # This happens inside a Rails engine as the parent app is the one
         # holding on to the pipeline.
         it "gets no AssetPipelineProvider if assets are enabled but not available" do
-          rails_application.config.assets = ActiveSupport::OrderedOptions.new(enabled: true)
+          rails_application.config.assets = ActiveSupport::OrderedOptions.new
           allow(rails_application).to receive(:assets).and_return nil
 
           run_initializer

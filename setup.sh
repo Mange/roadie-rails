@@ -10,7 +10,7 @@ function header() {
 }
 
 function green() {
-  echo $(tput setaf 2)$@$(tput sgr0)
+  echo "$(tput setaf 2)$*$(tput sgr0)"
 }
 
 function update() {
@@ -32,11 +32,11 @@ if [[ $1 == "install" ]]; then
   header "Installing gem dependencies"
   install
 
-  for app_path in $root/spec/railsapps/rails_*; do
+  for app_path in "$root"/spec/railsapps/rails_*; do
     (
-      header "Rails app $(basename $app_path)"
-      cd $app_path
-      echo "Installing gems for $(basename $app_path)"
+      header "Rails app $(basename "$app_path")"
+      cd "$app_path"
+      echo "Installing gems for $(basename "$app_path")"
       install
     )
   done
@@ -46,10 +46,10 @@ elif [[ $1 == "update" ]]; then
   header "Updating gem dependencies"
   update
 
-  for app_path in $root/spec/railsapps/rails_*; do
+  for app_path in "$root"/spec/railsapps/rails_*; do
     (
-      cd $app_path
-      header "Updating $(basename $app_path)"
+      cd "$app_path"
+      header "Updating $(basename "$app_path")"
       update
     )
   done

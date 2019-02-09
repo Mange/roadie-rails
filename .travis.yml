@@ -1,21 +1,25 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.2
-  - 2.3
-  - 2.4
   - 2.5
+  - 2.6
 
 matrix:
   fast_finish: true
 
+before_install:
+  # Ruby 2.6.0 does not work with Bundler 2 unless the gem system is updated
+  # first.
+  # https://github.com/bundler/bundler/issues/6784
+  - gem update --system
+  # Install latest bundler; Travis has an old version that Rails 5+ don't like.
+  # (2019-02-09; has 1.16.2, needs ~> 2.0)
+  - gem install bundler
+
 cache:
   directories:
   - .bundle
-  - spec/railsapps/rails_42/.bundle
-  - spec/railsapps/rails_42_sprockets_rails_3/.bundle
-  - spec/railsapps/rails_50/.bundle
   - spec/railsapps/rails_51/.bundle
   - spec/railsapps/rails_52/.bundle
-bundler_args: --without guard --path=.bundle
+bundler_args: --path=.bundle
 script: "rake"

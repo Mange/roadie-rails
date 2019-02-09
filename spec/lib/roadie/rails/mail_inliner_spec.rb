@@ -1,6 +1,7 @@
-# encoding: UTF-8
-require 'spec_helper'
-require 'mail'
+# frozen_string_literal: true
+
+require "spec_helper"
+require "mail"
 
 module Roadie
   module Rails
@@ -39,18 +40,22 @@ module Roadie
         let(:email) do
           html_string = html
           Mail.new do
-            content_type 'text/html; charset=UTF-8'
+            content_type "text/html; charset=UTF-8"
             body html_string
           end
         end
 
         it "adjusts the html part using Roadie" do
           document = double "A document", transform: "transformed HTML"
-          expect(DocumentBuilder).to receive(:build).with(html, instance_of(Options)).and_return document
+          allow(DocumentBuilder).to receive(:build).and_return(document)
 
           inliner.execute
 
           expect(email.body.decoded).to eq("transformed HTML")
+          expect(DocumentBuilder).to have_received(:build).with(
+            html,
+            instance_of(Options),
+          )
         end
 
         it "does nothing when given nil options" do
@@ -75,11 +80,15 @@ module Roadie
 
         it "adjusts the html part using Roadie" do
           document = double "A document", transform: "transformed HTML"
-          expect(DocumentBuilder).to receive(:build).with(html, instance_of(Options)).and_return document
+          allow(DocumentBuilder).to receive(:build).and_return(document)
 
           inliner.execute
 
           expect(email.html_part.body.decoded).to eq("transformed HTML")
+          expect(DocumentBuilder).to have_received(:build).with(
+            html,
+            instance_of(Options),
+          )
         end
 
         it "does nothing when given nil options" do

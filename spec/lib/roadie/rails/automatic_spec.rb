@@ -1,5 +1,7 @@
-require 'spec_helper'
-require 'mail'
+# frozen_string_literal: true
+
+require "spec_helper"
+require "mail"
 
 module Roadie
   module Rails
@@ -9,7 +11,7 @@ module Roadie
           @email = email
         end
 
-        def mail(options = {})
+        def mail(_options = {})
           @email
         end
       end
@@ -20,7 +22,9 @@ module Roadie
 
       describe "#roadie_options" do
         it "returns Rails' roadie config" do
-          allow(::Rails).to receive_message_chain(:application, :config, :roadie).and_return "roadie config"
+          allow(::Rails).to receive_message_chain(
+            :application, :config, :roadie
+          ).and_return("roadie config")
           expect(some_mailer.new.roadie_options).to eq("roadie config")
         end
       end

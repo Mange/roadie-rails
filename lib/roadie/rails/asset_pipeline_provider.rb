@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
     class AssetPipelineProvider
@@ -5,7 +7,13 @@ module Roadie
       attr_reader :pipeline
 
       def initialize(pipeline)
-        raise ArgumentError, "You need to pass a pipeline to initialize AssetPipelineProvider" unless pipeline
+        unless pipeline
+          raise(
+            ArgumentError,
+            "You need to pass a pipeline to initialize AssetPipelineProvider",
+          )
+        end
+
         super()
         @pipeline = pipeline
       end
@@ -27,11 +35,12 @@ module Roadie
 
       def find_asset_in_pipeline(name)
         normalized_name = normalize_asset_name(name)
-        @pipeline[normalized_name] || @pipeline[remove_asset_digest(normalized_name)]
+        @pipeline[normalized_name] ||
+          @pipeline[remove_asset_digest(normalized_name)]
       end
 
       def normalize_asset_name(href)
-        remove_asset_prefix(href.split('?').first)
+        remove_asset_prefix(href.split("?").first)
       end
 
       DIGEST_PATTERN = /
@@ -44,7 +53,7 @@ module Roadie
       /x.freeze
 
       def remove_asset_digest(path)
-        path.gsub(DIGEST_PATTERN, '.')
+        path.gsub(DIGEST_PATTERN, ".")
       end
 
       def remove_asset_prefix(path)

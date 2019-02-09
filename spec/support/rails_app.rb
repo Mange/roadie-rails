@@ -1,29 +1,42 @@
+# frozen_string_literal: true
+
 class RailsApp
-  def initialize(name, path, options = {})
+  def initialize(name, path)
     @name = name
     @path = File.expand_path("../../railsapps/#{path}", __FILE__)
-    @runner = options.fetch(:runner)
-    @using_asset_pipeline = options.fetch(:asset_pipeline)
-    @digests = options.fetch(:digests)
-    @sprockets = options[:sprockets]
     reset
   end
 
-  def to_s() @name end
-  def using_asset_pipeline?() @using_asset_pipeline end
-  def digested?() @digests end
-  def sprockets3_or_later?() @sprockets && @sprockets >= 3 end
+  def to_s
+    @name
+  end
 
   def read_email(mail_name)
     result = run("puts Mailer.#{mail_name}.to_s")
-    raise "No email returned. Did the rails application crash?" if result.strip.empty?
+
+    if result.strip.empty?
+      raise "No email returned. Did the rails application crash?"
+    end
+
     Mail.read_from_string(result)
   end
 
-  def read_delivered_email(mail_name, options = {})
+  def read_delivered_email( # rubocop:disable Metrics/MethodLength
+    mail_name,
+    options = {}
+  )
     deliver = options[:force_delivery] ? "deliver!" : "deliver"
-    result = run("mail = AutoMailer.#{mail_name}; mail.delivery_method(:test); mail.#{deliver}; puts mail.to_s")
-    raise "No email returned. Did the rails application crash?" if result.strip.empty?
+    result = run(<<~RUBY)
+      mail = AutoMailer.#{mail_name}
+      mail.delivery_method(:test)
+      mail.#{deliver}
+      puts mail.to_s
+    RUBY
+
+    if result.strip.empty?
+      raise "No email returned. Did the rails application crash?"
+    end
+
     Mail.read_from_string(result)
   end
 
@@ -33,12 +46,13 @@ class RailsApp
       puts providers.map { |p| p.class.name }.join(',')
     RUBY
     raise "No output present. Did the application crash?" if result.empty?
+
     result.split(",")
   end
 
   def reset
     @extra_code = ""
-    run_in_app_context 'rm -rf tmp/cache'
+    run_in_app_context "rm -rf tmp/cache"
   end
 
   def before_mail(code)
@@ -47,7 +61,7 @@ class RailsApp
 
   private
   def run(code)
-    Tempfile.open('code') do |file|
+    Tempfile.open("code") do |file|
       file << @extra_code unless @extra_code.empty?
       file << code
       file.close
@@ -56,7 +70,7 @@ class RailsApp
   end
 
   def run_file_in_app_context(file_path)
-    run_in_app_context "#{runner_script} #{file_path.shellescape}"
+    run_in_app_context "bin/rails runner #{file_path.shellescape}"
   end
 
   def run_in_app_context(command)
@@ -66,13 +80,4 @@ class RailsApp
       end
     end
   end
-
-  def runner_script
-    case @runner
-    when :script then "script/rails runner"
-    when :bin then "bin/rails runner"
-    else raise "Unknown runner type: #{@runner}"
-    end
-  end
 end
-

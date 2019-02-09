@@ -1,5 +1,7 @@
-require 'spec_helper'
-require 'mail'
+# frozen_string_literal: true
+
+require "spec_helper"
+require "mail"
 
 module Roadie
   module Rails
@@ -11,14 +13,16 @@ module Roadie
           @email = email
         end
 
-        def mail(options = {})
+        def mail(_options = {})
           @email
         end
       end
 
       describe "#roadie_options" do
         it "returns Rails' roadie config" do
-          allow(::Rails).to receive_message_chain(:application, :config, :roadie).and_return "roadie config"
+          allow(::Rails).to receive_message_chain(
+            :application, :config, :roadie
+          ).and_return("roadie config")
           expect(some_mailer.new.roadie_options).to eq("roadie config")
         end
       end
@@ -27,7 +31,9 @@ module Roadie
         let(:email) { Mail.new }
         let(:instance) { some_mailer.new(email) }
 
-        before { allow(instance).to receive(:roadie_options).and_return(Options.new) }
+        before do
+          allow(instance).to receive(:roadie_options).and_return(Options.new)
+        end
 
         before do
           inliner = double "Mail inliner"
@@ -37,27 +43,37 @@ module Roadie
 
         it "calls the original mail method with all options and the block" do
           expect(instance).to receive(:mail) do |options, &block|
-            expect(options).to eq({some: "option"})
+            expect(options).to eq(some: "option")
             expect(block).not_to be_nil
             email
           end
 
-          instance.roadie_mail(some: "option") { }
-        end
-
-        it "allows to override roadie options" do
-          custom_options = { foo: 'bar' }
-          inliner = double "Inliner"
-          expect(MailInliner).to receive(:new).with(email, custom_options).and_return inliner
-          expect(inliner).to receive(:execute).and_return "inlined email"
-          expect(instance.roadie_mail({ }, custom_options)).to eq("inlined email")
+          instance.roadie_mail(some: "option") {}
         end
 
         it "inlines the email" do
-          inliner = double "Inliner"
-          expect(MailInliner).to receive(:new).with(email, instance_of(Options)).and_return inliner
-          expect(inliner).to receive(:execute).and_return "inlined email"
+          inliner = instance_double(MailInliner, execute: "inlined email")
+          allow(MailInliner).to receive(:new).and_return(inliner)
+
           expect(instance.roadie_mail).to eq("inlined email")
+
+          expect(MailInliner).to have_received(:new).with(
+            email,
+            instance_of(Options),
+          )
+          expect(inliner).to have_received(:execute)
+        end
+
+        it "allows to override roadie options" do
+          inliner = instance_double(MailInliner, execute: "inlined email")
+          allow(MailInliner).to receive(:new).and_return(inliner)
+
+          expect(
+            instance.roadie_mail({}, foo: "bar"),
+          ).to eq("inlined email")
+
+          expect(MailInliner).to have_received(:new).with(email, foo: "bar")
+          expect(inliner).to have_received(:execute)
         end
       end
     end

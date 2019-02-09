@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
     # Extend instances of Mail with this to have it inlined automatically when

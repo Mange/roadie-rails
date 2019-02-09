@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Roadie
   module Rails
     class MailInliner
@@ -10,7 +12,7 @@ module Roadie
 
       def execute
         if options
-          improve_body if email.content_type =~ /^text\/html/
+          improve_body if email.content_type =~ %r{^text/html}
           improve_html_part(email.html_part) if email.html_part
         end
         email

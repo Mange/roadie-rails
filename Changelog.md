@@ -1,6 +1,12 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v1.3.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.0.0...master)
+
+Nothing yet.
+
+### 2.0.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v1.3.0...v2.0.0)
 
 * Drop support for Ruby before 2.5.
 * Drop support for Rails before 5.1.

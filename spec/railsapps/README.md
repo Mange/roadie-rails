@@ -18,13 +18,14 @@ gem install rails -v x.y.z
 ## Generate Rails app
 
 ```bash
-rails _x.y.z._ new rails_x_y --skip-javascript --skip-keeps --skip-active-record --skip-test-unit
+APP_DIR=rails_xy
+rails _x.y.z._ new $APP_DIR --skip-javascript --skip-keeps --skip-active-record --skip-test-unit
 ```
 
 ## Clean up the app
 
 ```bash
-cd rails_x_y
+cd $APP_DIR
 ```
 
 The next step is of course specific to each Rails version. One of the easiest methods is to just start by deleting directories you know you have no use for, like `tmp`, `log` and `README.md`.
@@ -41,13 +42,19 @@ After doing this, run `git add .` and inspect the list of added files. If there'
 
 ```bash
 cd ..
-rm -rf rails_x_y/app/assets rails_x_y/app/views
-ln -s ../../shared/pipeline/app/assets rails_x_y/app/assets
-ln -s ../../shared/all/app/mailers rails_x_y/app/mailers
-ln -s ../../shared/all/app/views rails_x_y/app/views
+rm -rf $APP_DIR/app/assets $APP_DIR/app/mailers $APP_DIR/app/views
+ln -s ../../shared/pipeline/app/assets $APP_DIR/app/assets
+ln -s ../../shared/all/app/mailers $APP_DIR/app/mailers
+ln -s ../../shared/all/app/views $APP_DIR/app/views
 ```
 
 ## Apply options and add gem
+
+Add the following line to `config/initializers/assets.rb`:
+
+```ruby
+Rails.application.config.assets.precompile += %w( email.css )
+```
 
 Open up `config/application.rb` and add the following options:
 

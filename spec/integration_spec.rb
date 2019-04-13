@@ -12,6 +12,7 @@ describe "Integrations" do
   rails_apps = [
     RailsApp.new("Rails 5.1.0", "rails_51"),
     RailsApp.new("Rails 5.2.0", "rails_52"),
+    RailsApp.new("Rails 6.0.0.beta3", "rails_60"),
   ]
 
   shared_examples "generates valid email" do |message|

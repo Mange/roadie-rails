@@ -2,7 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.0.0...master)
 
-Nothing yet.
+* Rails 6 support (#88) -  - [Gleb Mazovetskiy (glebm)](https://github.com/glebm).
 
 ### 2.0.0
 

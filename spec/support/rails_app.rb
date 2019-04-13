@@ -52,6 +52,7 @@ class RailsApp
 
   def reset
     @extra_code = ""
+    run_in_app_context "mkdir -p tmp"
     run_in_app_context "rm -rf tmp/cache"
   end
 

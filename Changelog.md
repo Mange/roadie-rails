@@ -1,8 +1,14 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v2.0.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.0...master)
 
-* Rails 6 support (#88) -  - [Gleb Mazovetskiy (glebm)](https://github.com/glebm).
+* Nothing yet
+
+### 2.1.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.0.0...v2.1.0)
+
+* Rails 6 support (#88) - [Gleb Mazovetskiy (glebm)](https://github.com/glebm)
 
 ### 2.0.0
 

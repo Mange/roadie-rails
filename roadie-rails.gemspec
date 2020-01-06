@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "railties", ">= 5.1", "< 6.1"
-  spec.add_dependency "roadie", "~> 3.1"
+  spec.add_dependency "roadie", ">= 3.1", "< 5.0"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rails", ">= 5.1", "< 6.1"

@@ -2,6 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.0...master)
 
+* Relax Roadie dependency to allow v4.x
 * Updated embedded Rails apps (used in tests) to work with new Sprockets 4.
 * Updated Rubocop config to work with newer Rubocop versions.
 

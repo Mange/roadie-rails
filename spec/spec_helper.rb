@@ -21,4 +21,4 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 end
 
-Dir["./spec/support/**/*.rb"].each { |file| require file }
+Dir["./spec/support/**/*.rb"].sort.each { |file| require file }

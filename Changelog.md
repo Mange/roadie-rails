@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.0...master)
 
-* Nothing yet
+* Updated embedded Rails apps (used in tests) to work with new Sprockets 4.
+* Updated Rubocop config to work with newer Rubocop versions.
 
 ### 2.1.0
 

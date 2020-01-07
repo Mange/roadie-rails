@@ -27,7 +27,7 @@ Layout/SpaceInsideHashLiteralBraces:
 Style/Documentation:
   Enabled: false
 
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 
 Layout/MultilineMethodCallIndentation:
@@ -64,7 +64,7 @@ Metrics/BlockLength:
     - 'spec/**/*_spec.rb'
     - 'spec/shared_examples/*.rb'
 
-Metrics/LineLength:
+Layout/LineLength:
   IgnoredPatterns:
     - '^\s*it\s' # Test names can be long
   Exclude:

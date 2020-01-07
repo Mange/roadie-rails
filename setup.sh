@@ -23,7 +23,7 @@ function install() {
 }
 
 
-root=$(dirname $0)
+root=$(dirname "$0")
 
 # Set by Travis CI; interferes with the nested repos
 unset BUNDLE_GEMFILE
@@ -36,7 +36,7 @@ if [[ $1 == "install" ]]; then
     (
       header "Rails app $(basename "$app_path")"
       cd "$app_path"
-      echo "Installing gems for $(basename "$app_path")"
+      echo -n "Installing gems for $(basename "$app_path")"
       install
     )
   done

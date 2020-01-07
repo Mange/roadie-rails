@@ -23,7 +23,7 @@ function install() {
 }
 
 
-root=$(dirname $0)
+root=$(dirname "$0")
 
 # Set by Travis CI; interferes with the nested repos
 unset BUNDLE_GEMFILE

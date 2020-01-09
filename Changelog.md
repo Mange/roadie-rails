@@ -1,8 +1,17 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.1...master)
+
+* Nothing yet.
+
+### 2.1.1
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.0...v2.1.1)
 
 * Relax Roadie dependency to allow v4.x
+
+Development changes:
+
 * Updated embedded Rails apps (used in tests) to work with new Sprockets 4.
 * Updated Rubocop config to work with newer Rubocop versions.
 

@@ -31,7 +31,7 @@ describe "Integrations" do
       expect(document).to have_selector("body h1")
 
       expected_image_url =
-        "https://example.app.org/assets/rails-322506f9917889126e81df2833a6eecdf2e394658d53dad347e9882dd4dbf28e.png"
+        "https://example.app.org/assets/rails-cd95a25e70dfe61add5a96e11d3fee0f29e9ba2b05099723d57bba7dfa725c8a.png"
 
       expect(document).to have_styling(
         "background" => "url(#{expected_image_url})",

@@ -283,9 +283,11 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
 * Ruby:
   * MRI 2.5
   * MRI 2.6
+  * MRI 2.7
 * Rails
   * 5.1
   * 5.2
+  * 6.0
 
 Let me know if you want any other combination supported officially.
 

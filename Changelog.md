@@ -1,8 +1,14 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.1...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.2.0...master)
 
-- Support Rails 6.1 [@afomera](https://github.com/afomera)
+* Nothing yet
+
+### 2.2.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.1...v2.2.0)
+
+* Support Rails 6.1 - [A. Fomera (afomera)](https://github.com/afomera)
 
 ### 2.1.1
 

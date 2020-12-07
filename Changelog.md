@@ -2,7 +2,7 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.1.1...master)
 
-* Nothing yet.
+- Support Rails 6.1 [@afomera](https://github.com/afomera)
 
 ### 2.1.1
 

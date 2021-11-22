@@ -75,7 +75,7 @@ class RailsApp
   end
 
   def run_in_app_context(command)
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       Dir.chdir @path do
         IO.popen(command).read
       end

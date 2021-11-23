@@ -2,7 +2,8 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.2.0...master)
 
-* Nothing yet
+* Support Rails 7.0 - [Sean Floyd (SeanLF)](https://github.com/SeanLF)
+* Drop support for Ruby 2.5 (EoL).
 
 ### 2.2.0
 

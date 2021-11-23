@@ -1,10 +1,19 @@
 # frozen_string_literal: true
 
 class RailsApp
-  def initialize(name, path)
+  def initialize(name, path, min_ruby_version: nil)
     @name = name
     @path = File.expand_path("../../railsapps/#{path}", __FILE__)
+    @min_ruby_version = min_ruby_version && Gem::Version.new(min_ruby_version)
     reset
+  end
+
+  def supported?
+    if @min_ruby_version
+      Gem::Version.new(RUBY_VERSION) >= @min_ruby_version
+    else
+      true
+    end
   end
 
   def to_s
@@ -61,6 +70,7 @@ class RailsApp
   end
 
   private
+
   def run(code)
     Tempfile.open("code") do |file|
       file << @extra_code unless @extra_code.empty?
@@ -75,7 +85,7 @@ class RailsApp
   end
 
   def run_in_app_context(command)
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       Dir.chdir @path do
         IO.popen(command).read
       end

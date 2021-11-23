@@ -1,9 +1,9 @@
 sudo: false
 language: ruby
 rvm:
-  - 2.5
   - 2.6
   - 2.7
+  - 3.0
 
 matrix:
   fast_finish: true
@@ -19,8 +19,10 @@ before_install:
 
 cache:
   directories:
-  - .bundle
-  - spec/railsapps/rails_51/.bundle
-  - spec/railsapps/rails_52/.bundle
+    - .bundle
+    - spec/railsapps/rails_51/.bundle
+    - spec/railsapps/rails_52/.bundle
+    - spec/railsapps/rails_60/.bundle
+    - spec/railsapps/rails_70/.bundle
 bundler_args: --path=.bundle
 script: "rake"

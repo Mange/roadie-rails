@@ -288,6 +288,7 @@ Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of]
   * 5.1
   * 5.2
   * 6.0
+  * 7.0
 
 Let me know if you want any other combination supported officially.
 

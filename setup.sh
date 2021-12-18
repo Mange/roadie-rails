@@ -25,7 +25,8 @@ function install() {
 
 root=$(dirname "$0")
 
-# Set by Travis CI; interferes with the nested repos
+# Previously needed by Travis CI; might still be needed at Github Actions
+# due to nested repos
 unset BUNDLE_GEMFILE
 
 if [[ $1 == "install" ]]; then

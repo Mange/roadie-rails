@@ -1,19 +1,20 @@
 # frozen_string_literal: true
 
 class RailsApp
-  def initialize(name, path, min_ruby_version: nil)
+  def initialize(name, path, min_ruby_version: nil, max_ruby_version: nil)
     @name = name
     @path = File.expand_path("../../railsapps/#{path}", __FILE__)
+    @max_ruby_version = max_ruby_version && Gem::Version.new(max_ruby_version)
     @min_ruby_version = min_ruby_version && Gem::Version.new(min_ruby_version)
     reset
   end
 
   def supported?
-    if @min_ruby_version
-      Gem::Version.new(RUBY_VERSION) >= @min_ruby_version
-    else
-      true
-    end
+    minimum = @min_ruby_version || Gem::Version.new("0.0.0")
+    maximum = @max_ruby_version || Gem::Version.new("100.0.0")
+    version = Gem::Version.new(RUBY_VERSION)
+
+    version >= minimum && version <= maximum
   end
 
   def to_s

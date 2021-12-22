@@ -1,6 +1,6 @@
 # roadie-rails
 
-[![Build history and status](https://secure.travis-ci.org/Mange/roadie-rails.png)](http://travis-ci.org/#!/Mange/roadie-rails)
+[![Build history and status](https://github.com/Mange/roadie-rails/actions/workflows/main.yml/badge.svg)](https://github.com/Mange/roadie-rails/actions/workflows/main.yml)
 [![Code Climate](https://codeclimate.com/github/Mange/roadie-rails.png)](https://codeclimate.com/github/Mange/roadie-rails)
 [![Code coverage status](https://codecov.io/github/Mange/roadie-rails/coverage.svg?branch=master)](https://codecov.io/github/Mange/roadie-rails?branch=master)
 [![Gem](https://img.shields.io/gem/v/roadie-rails.svg)](https://rubygems.org/gems/roadie-rails)
@@ -278,7 +278,7 @@ end
 
 ## Build status ##
 
-Tested with [Travis CI](http://travis-ci.org) using [almost all combinations of](http://travis-ci.org/#!/Mange/roadie-rails):
+Tested with Github Actions on multiple Ruby and Rails versions:
 
 * Ruby:
   * MRI 2.6

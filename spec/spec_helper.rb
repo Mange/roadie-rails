@@ -11,8 +11,8 @@ if ENV["CI"]
     end
   end
 
-  require "codecov"
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  require "simplecov-cobertura"
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 end
 
 require "roadie-rails"

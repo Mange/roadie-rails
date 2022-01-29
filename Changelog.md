@@ -2,7 +2,11 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v2.3.0...master)
 
-* Nothing yet.
+Development changes:
+
+* Replace Travis CI with Github CI.
+  - Ruby versions: 2.6, 2.7, 3.0, 3.1
+  - Rails versions: 5.1, 5.2, 6.0, 6.1, 7.0
 
 ### 2.3.0
 

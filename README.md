@@ -284,12 +284,15 @@ Tested with Github Actions on multiple Ruby and Rails versions:
   * MRI 2.6
   * MRI 2.7
   * MRI 3.0
+  * MRI 3.1
 * Rails
   * 5.1
   * 5.2
   * 6.0
+  * 6.1
   * 7.0
 
+Please note that [all Rails-versions are not compatible with all Ruby-versions](https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html).
 Let me know if you want any other combination supported officially.
 
 ### Versioning ###
@@ -316,7 +319,7 @@ After running `rake` for the first time and you want to keep running tests witho
 
 (The MIT License)
 
-Copyright © 2013-2021 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
+Copyright © 2013-2022 [Magnus Bergmark](https://github.com/Mange) <magnus.bergmark@gmail.com>, et. al.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

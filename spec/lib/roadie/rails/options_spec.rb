@@ -4,7 +4,7 @@ require "spec_helper"
 require "ostruct"
 
 module Roadie
-  module Rails # rubocop:disable Metrics/ModuleLength
+  module Rails
     describe Options do
       it "raises errors when constructed with unknown options" do
         expect {
@@ -122,7 +122,7 @@ module Roadie
         let(:valid_value) { -> {} }
         let(:other_valid_value) { -> {} }
 
-        def expect_combinated_value(value) # rubocop:disable Metrics/AbcSize
+        def expect_combinated_value(value)
           allow(valid_value).to receive(:call).and_return 1
           allow(other_valid_value).to receive(:call).and_return 2
 
@@ -137,7 +137,7 @@ module Roadie
         let(:valid_value) { -> {} }
         let(:other_valid_value) { -> {} }
 
-        def expect_combinated_value(value) # rubocop:disable Metrics/AbcSize
+        def expect_combinated_value(value)
           allow(valid_value).to receive(:call).and_return 1
           allow(other_valid_value).to receive(:call).and_return 2
 

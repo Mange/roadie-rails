@@ -31,7 +31,7 @@ class RailsApp
     Mail.read_from_string(result)
   end
 
-  def read_delivered_email( # rubocop:disable Metrics/MethodLength
+  def read_delivered_email(
     mail_name,
     options = {}
   )

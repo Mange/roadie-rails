@@ -33,3 +33,11 @@ jobs:
         run: rake
 
       - uses: codecov/codecov-action@v2
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: standardrb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: amoeba/standardrb-action@v2

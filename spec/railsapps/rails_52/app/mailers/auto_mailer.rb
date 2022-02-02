@@ -14,8 +14,9 @@ class AutoMailer < ActionMailer::Base
   end
 
   private
+
   def roadie_options
-    unless action_name =~ /disabled/
+    unless /disabled/.match?(action_name)
       super.combine(url_options: {protocol: "https"})
     end
   end

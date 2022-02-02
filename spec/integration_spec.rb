@@ -36,7 +36,7 @@ describe "Integrations" do
         "https://example.app.org/assets/rails-cd95a25e70dfe61add5a96e11d3fee0f29e9ba2b05099723d57bba7dfa725c8a.png"
 
       expect(document).to have_styling(
-        "background" => "url(#{expected_image_url})",
+        "background" => "url(#{expected_image_url})"
       ).at_selector(".image")
 
       # If we deliver mails we can catch weird problems with headers being
@@ -60,7 +60,7 @@ describe "Integrations" do
 
       include_examples(
         "generates valid email",
-        "with automatic mailer and forced delivery",
+        "with automatic mailer and forced delivery"
       ) do
         let(:email) do
           app.read_delivered_email(:normal_email, force_delivery: true)
@@ -88,7 +88,7 @@ describe "Integrations" do
           %w[
             Roadie::FilesystemProvider
             Roadie::Rails::AssetPipelineProvider
-          ],
+          ]
         )
       end
     end

@@ -31,7 +31,7 @@ module Rails70
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.roadie.url_options = {host: 'example.app.org'}
+    config.roadie.url_options = {host: "example.app.org"}
     config.action_view.preload_links_header = false
   end
 end

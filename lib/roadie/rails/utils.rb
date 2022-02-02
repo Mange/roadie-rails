@@ -4,6 +4,7 @@ module Roadie
   module Rails
     module Utils
       module_function
+
       # Combine two hashes, or return the non-nil hash if either is nil.
       # Returns nil if both are nil.
       def combine_hash(first, second)

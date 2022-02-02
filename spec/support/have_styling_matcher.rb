@@ -49,9 +49,11 @@ class StylingExpectation
   end
 
   protected
+
   attr_reader :rules
 
   private
+
   def parse_rules(css)
     css.split(";").map { |property| parse_property(property) }
   end

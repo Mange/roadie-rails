@@ -59,7 +59,7 @@ module Roadie
 
           expect(MailInliner).to have_received(:new).with(
             email,
-            instance_of(Options),
+            instance_of(Options)
           )
           expect(inliner).to have_received(:execute)
         end
@@ -69,7 +69,7 @@ module Roadie
           allow(MailInliner).to receive(:new).and_return(inliner)
 
           expect(
-            instance.roadie_mail({}, foo: "bar"),
+            instance.roadie_mail({}, foo: "bar")
           ).to eq("inlined email")
 
           expect(MailInliner).to have_received(:new).with(email, foo: "bar")

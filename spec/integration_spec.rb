@@ -10,11 +10,11 @@ describe "Integrations" do
   end
 
   rails_apps = [
-    RailsApp.new("Rails 5.1.0", "rails_51", max_ruby_version: "2.7.5"),
-    RailsApp.new("Rails 5.2.0", "rails_52", max_ruby_version: "2.7.5"),
-    RailsApp.new("Rails 6.0.0", "rails_60"),
-    RailsApp.new("Rails 6.1.4.4", "rails_61"),
-    RailsApp.new("Rails 7.0.0", "rails_70", min_ruby_version: "2.7.0")
+    RailsApp.new("Rails 5.1", "rails_51", max_ruby_version: "2.7"),
+    RailsApp.new("Rails 5.2", "rails_52", max_ruby_version: "2.7"),
+    RailsApp.new("Rails 6.0", "rails_60", max_ruby_version: "3.0"),
+    RailsApp.new("Rails 6.1", "rails_61", max_ruby_version: "3.0"),
+    RailsApp.new("Rails 7.0", "rails_70", min_ruby_version: "2.7")
   ]
 
   shared_examples "generates valid email" do |message|

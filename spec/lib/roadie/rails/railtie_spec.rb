@@ -17,8 +17,8 @@ module Roadie
       def run_initializer
         # Hack to make the Railtie able to be initialized again
         # Railties are global state, after all, stored on the classes.
-        Railtie.instance_variable_set("@instance", nil) # Embrace me, Cthulhu!
-        Railtie.instance_variable_set("@ran", nil)
+        Railtie.instance_variable_set(:@instance, nil) # Embrace me, Cthulhu!
+        Railtie.instance_variable_set(:@ran, nil)
         Railtie.run_initializers :default, rails_application
       end
 

@@ -13,6 +13,7 @@ class Mailer < ActionMailer::Base
   end
 
   private
+
   def roadie_options
     super.combine(url_options: {protocol: "https"})
   end

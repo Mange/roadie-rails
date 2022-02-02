@@ -6,20 +6,6 @@ require "mail"
 module Roadie
   module Rails
     describe InlineOnDelivery do
-      class FakeMail < Mail::Message
-        def delivered?
-          @delivered
-        end
-
-        def deliver
-          @delivered = true
-        end
-
-        def deliver!
-          @delivered = true
-        end
-      end
-
       it "inlines on #delivery" do
         inliner = instance_double(MailInliner, execute: nil)
         options = instance_double(Options)

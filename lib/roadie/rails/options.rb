@@ -18,7 +18,7 @@ module Roadie
         :url_options,
         :before_transformation,
         :after_transformation,
-        :keep_uninlinable_css,
+        :keep_uninlinable_css
       )
 
       def initialize(options = {})
@@ -75,7 +75,7 @@ module Roadie
         dup.combine! options
       end
 
-      def combine!(options) # rubocop:disable Metrics/MethodLength
+      def combine!(options)
         %i[after_transformation before_transformation].each do |name|
           self[name] = Utils.combine_callable(self[name], options[name])
         end
@@ -90,7 +90,7 @@ module Roadie
 
         self.url_options = Utils.combine_hash(
           url_options,
-          options[:url_options],
+          options[:url_options]
         )
 
         self
@@ -113,13 +113,14 @@ module Roadie
       end
 
       private
+
       def complain_about_unknown_keys(keys)
         invalid_keys = keys - ATTRIBUTE_NAMES
         unless invalid_keys.empty?
           raise(
             ArgumentError,
             "Unknown configuration parameters: #{invalid_keys}",
-            caller(1),
+            caller(1)
           )
         end
       end

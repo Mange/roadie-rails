@@ -10,7 +10,7 @@ module Roadie
         unless pipeline
           raise(
             ArgumentError,
-            "You need to pass a pipeline to initialize AssetPipelineProvider",
+            "You need to pass a pipeline to initialize AssetPipelineProvider"
           )
         end
 
@@ -25,6 +25,7 @@ module Roadie
       end
 
       private
+
       def filename(asset)
         if asset.respond_to?(:filename) # sprockets 4 or later
           asset.filename

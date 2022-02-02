@@ -9,7 +9,7 @@ module Roadie
 
       initializer "roadie-rails.setup" do |app|
         config.roadie.asset_providers = [
-          Roadie::FilesystemProvider.new(::Rails.root.join("public").to_s),
+          Roadie::FilesystemProvider.new(::Rails.root.join("public").to_s)
         ]
 
         if app.config.respond_to?(:assets) && app.config.assets

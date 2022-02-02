@@ -13,6 +13,6 @@ Bundler.require(*Rails.groups)
 module Rails61
   class Application < Rails::Application
     config.load_defaults 6.1
-    config.roadie.url_options = { host: "example.app.org" }
+    config.roadie.url_options = {host: "example.app.org"}
   end
 end

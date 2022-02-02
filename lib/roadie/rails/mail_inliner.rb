@@ -12,13 +12,14 @@ module Roadie
 
       def execute
         if options
-          improve_body if email.content_type =~ %r{^text/html}
+          improve_body if %r{^text/html}.match?(email.content_type)
           improve_html_part(email.html_part) if email.html_part
         end
         email
       end
 
       private
+
       def improve_body
         email.body = transform_html(email.body.decoded)
       end

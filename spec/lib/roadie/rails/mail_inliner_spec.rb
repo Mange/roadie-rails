@@ -54,7 +54,7 @@ module Roadie
           expect(email.body.decoded).to eq("transformed HTML")
           expect(DocumentBuilder).to have_received(:build).with(
             html,
-            instance_of(Options),
+            instance_of(Options)
           )
         end
 
@@ -87,7 +87,7 @@ module Roadie
           expect(email.html_part.body.decoded).to eq("transformed HTML")
           expect(DocumentBuilder).to have_received(:build).with(
             html,
-            instance_of(Options),
+            instance_of(Options)
           )
         end
 

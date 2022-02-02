@@ -1,12 +1,17 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v2.3.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v3.0.0...master)
+
+### 3.0.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v2.3.0...v3.0.0)
+
+* Drop support for Ruby versions < 2.6.
+* Add support for Ruby 3.0 and 3.1.
 
 Development changes:
 
 * Replace Travis CI with Github CI.
-  - Ruby versions: 2.6, 2.7, 3.0, 3.1
-  - Rails versions: 5.1, 5.2, 6.0, 6.1, 7.0
 
 ### 2.3.0
 

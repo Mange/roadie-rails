@@ -51,7 +51,7 @@ module Roadie
          [a-z0-9]{64}    # New style is 64 characters
         )
         \.               # Dot for the file extension
-      /x.freeze
+      /x
 
       def remove_asset_digest(path)
         path.gsub(DIGEST_PATTERN, ".")

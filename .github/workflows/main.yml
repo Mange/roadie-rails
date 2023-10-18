@@ -42,7 +42,16 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # This setup is not compatible with the way Travis CI was
+      # setup, so the cache will only work for the root folder.
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
       - name: standardrb
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: amoeba/standardrb-action@v2
+        run: bundle exec standardrb

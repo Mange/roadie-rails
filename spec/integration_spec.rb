@@ -15,7 +15,7 @@ describe "Integrations" do
     RailsApp.new("Rails 6.0", "rails_60", max_ruby_version: "3.0"),
     RailsApp.new("Rails 6.1", "rails_61", max_ruby_version: "3.0"),
     RailsApp.new("Rails 7.0", "rails_70", min_ruby_version: "2.7"),
-    RailsApp.new("Rails 7.1", "rails_71", min_ruby_version: "2.7"),
+    RailsApp.new("Rails 7.1", "rails_71", min_ruby_version: "2.7")
   ]
 
   shared_examples "generates valid email" do |message|

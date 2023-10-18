@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
 
   spec.files = `git ls-files | grep -v ^spec`.split($INPUT_RECORD_SEPARATOR)
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
   spec.extra_rdoc_files = %w[README.md Changelog.md LICENSE.txt]
   spec.require_paths = ["lib"]
 

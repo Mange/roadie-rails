@@ -1,6 +1,17 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v3.0.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v3.1.0...master)
+
+### 3.1.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v3.0.0...v3.1.0)
+
+* Support Rails 7.1 - [Frederik Spang](https://github.com/frederikspang)
+* Add support for Ruby 3.2.
+
+Development changes:
+
+* Fix Github CI lint job with standardrb.
 
 ### 3.0.0
 

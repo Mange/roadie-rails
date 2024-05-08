@@ -15,7 +15,8 @@ describe "Integrations" do
     RailsApp.new("Rails 6.0", "rails_60", max_ruby_version: "3.0"),
     RailsApp.new("Rails 6.1", "rails_61", max_ruby_version: "3.0"),
     RailsApp.new("Rails 7.0", "rails_70", min_ruby_version: "2.7"),
-    RailsApp.new("Rails 7.1", "rails_71", min_ruby_version: "2.7")
+    RailsApp.new("Rails 7.1 with sprockets", "rails_71", min_ruby_version: "2.7"),
+    RailsApp.new("Rails 7.1 with propshaft", "rails_71_with_propshaft", min_ruby_version: "2.7", asset_pipeline: :propshaft)
   ]
 
   shared_examples "generates valid email" do |message|
@@ -47,7 +48,7 @@ describe "Integrations" do
     end
   end
 
-  rails_apps.select(&:supported?).each do |app|
+  rails_apps.select(&:supported?).select(&:with_sprockets?).each do |app|
     describe "with #{app}" do
       before { app.reset }
 
@@ -89,6 +90,79 @@ describe "Integrations" do
           %w[
             Roadie::FilesystemProvider
             Roadie::Rails::AssetPipelineProvider
+          ]
+        )
+      end
+    end
+  end
+
+  rails_apps.select(&:supported?).select(&:with_propshaft?).each do |app|
+    describe "with #{app}" do
+      before { app.reset }
+
+      it "inlines styles for multipart emails" do
+        email = app.read_email(:normal_email)
+
+        expect(email.to).to eq(["example@example.org"])
+        expect(email.from).to eq(["john@example.com"])
+        expect(email).to have(2).parts
+
+        expect(email.text_part.body.decoded).not_to match(/<.*>/)
+
+        html = email.html_part.body.decoded
+        expect(html).to include "<!DOCTYPE"
+        expect(html).to include "<head"
+
+        document = parse_html_in_email(email)
+        expect(document).to have_selector("body h1")
+
+        expected_image_url =
+          "https://example.app.org/assets/rails-fbe4356d4aa42b95f211236439f3e675a5f9a7e6.png"
+
+        expect(document).to have_styling(
+          "background" => "url(\"#{expected_image_url}\")"
+        ).at_selector(".image")
+
+        # If we deliver mails we can catch weird problems with headers being
+        # invalid
+        email.delivery_method :test
+        email.deliver
+      end
+
+      it "inlines styles with automatic mailer" do
+        email = app.read_delivered_email(:normal_email)
+
+        expect(email.to).to eq(["example@example.org"])
+        expect(email.from).to eq(["john@example.com"])
+        expect(email).to have(2).parts
+
+        expect(email.text_part.body.decoded).not_to match(/<.*>/)
+
+        html = email.html_part.body.decoded
+        expect(html).to include "<!DOCTYPE"
+        expect(html).to include "<head"
+
+        document = parse_html_in_email(email)
+        expect(document).to have_selector("body h1")
+
+        expected_image_url =
+          "https://example.app.org/assets/rails-fbe4356d4aa42b95f211236439f3e675a5f9a7e6.png"
+
+        expect(document).to have_styling(
+          "background" => "url(\"#{expected_image_url}\")"
+        ).at_selector(".image")
+
+        # If we deliver mails we can catch weird problems with headers being
+        # invalid
+        email.delivery_method :test
+        email.deliver
+      end
+
+      it "has a AssetPropshaftProvider together with a FilesystemProvider" do
+        expect(app.read_providers).to eq(
+          %w[
+            Roadie::FilesystemProvider
+            Roadie::Rails::AssetPropshaftProvider
           ]
         )
       end

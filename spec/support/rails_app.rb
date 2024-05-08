@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class RailsApp
-  def initialize(name, path, min_ruby_version: nil, max_ruby_version: nil)
+  def initialize(name, path, min_ruby_version: nil, max_ruby_version: nil, asset_pipeline: :sprockets)
     @name = name
     @path = File.expand_path("../../railsapps/#{path}", __FILE__)
     @max_ruby_version = max_ruby_version && Gem::Version.new(max_ruby_version)
     @min_ruby_version = min_ruby_version && Gem::Version.new(min_ruby_version)
-    reset
+    @asset_pipeline = asset_pipeline
   end
 
   def supported?
@@ -15,6 +15,14 @@ class RailsApp
     version = Gem::Version.new(RUBY_VERSION)
 
     version >= minimum && version <= maximum
+  end
+
+  def with_propshaft?
+    @asset_pipeline == :propshaft
+  end
+
+  def with_sprockets?
+    @asset_pipeline == :sprockets
   end
 
   def to_s

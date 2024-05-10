@@ -1,0 +1,5 @@
+ignore:
+  - 'lib/roadie/rails/mailer.rb':
+    - Style/ArgumentsForwarding 
+  - 'lib/roadie/rails/options.rb':
+    - Performance/StringIdentifierArgument

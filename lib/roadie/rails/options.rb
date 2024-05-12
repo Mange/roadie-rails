@@ -106,7 +106,7 @@ module Roadie
 
       def []=(option, value)
         if ATTRIBUTE_NAMES.include?(option)
-          public_send("#{option}=", value)
+          public_send(:"#{option}=", value)
         else
           raise ArgumentError, "#{option.inspect} is not a valid option"
         end

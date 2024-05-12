@@ -281,16 +281,9 @@ end
 Tested with Github Actions on multiple Ruby and Rails versions:
 
 * Ruby:
-  * MRI 2.6
-  * MRI 2.7
-  * MRI 3.0
-  * MRI 3.1
+  See [Workflow Matrix](/.github/workflows/main.yml)
 * Rails
-  * 5.1
-  * 5.2
-  * 6.0
-  * 6.1
-  * 7.0
+  See [Integration Spec File](/spec/integration_spec.rb)
 
 Please note that [all Rails-versions are not compatible with all Ruby-versions](https://www.fastruby.io/blog/ruby/rails/versions/compatibility-table.html).
 Let me know if you want any other combination supported officially.

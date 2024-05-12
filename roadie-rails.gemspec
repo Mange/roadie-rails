@@ -30,4 +30,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-collection_matchers"
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "standard"
+
+  spec.post_install_message = %q{
+    This would be the last version that supports ruby 2.6
+  }
 end

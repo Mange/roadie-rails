@@ -1,5 +1,2 @@
-ignore:
-  - 'lib/roadie/rails/mailer.rb':
-    - Style/ArgumentsForwarding 
-  - 'lib/roadie/rails/options.rb':
-    - Performance/StringIdentifierArgument
+ruby_version: 2.6
+parallel: true

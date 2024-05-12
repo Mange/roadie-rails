@@ -13,7 +13,6 @@ on:
       - master
     paths-ignore:
       - '**.md'
-      - '**.gemspec'
       - '**.txt'
 
   pull_request:

@@ -1,6 +1,14 @@
 ### development version
 
-[full changelog](https://github.com/Mange/roadie-rails/compare/v3.1.0...master)
+[full changelog](https://github.com/Mange/roadie-rails/compare/v3.2.0...master)
+
+### 3.2.0
+
+[full changelog](https://github.com/Mange/roadie-rails/compare/v3.1.0...v3.2.0)
+
+* Support [Propshaft](https://github.com/rails/propshaft) - [Juani Villarejo](https://github.com/jvillarejo) [#114](https://github.com/Mange/roadie-rails/pull/114)
+* Add support (CI) for Ruby 3.3.
+* Last version for supporting Ruby 2.6 (EoL).
 
 ### 3.1.0
 

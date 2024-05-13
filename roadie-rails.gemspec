@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.version = Roadie::Rails::VERSION
   spec.authors = ["Magnus Bergmark"]
   spec.email = ["magnus.bergmark@gmail.com"]
-  spec.homepage = "http://github.com/Mange/roadie-rails"
+  spec.homepage = "https://github.com/Mange/roadie-rails"
   spec.summary = "Making HTML emails comfortable for the Rails rockstars"
   spec.description = "Hooks Roadie into your Rails application to help with email generation."
   spec.license = "MIT"

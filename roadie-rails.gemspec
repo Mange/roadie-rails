@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description = "Hooks Roadie into your Rails application to help with email generation."
   spec.license = "MIT"
 
-  spec.required_ruby_version = ">= 2.6"
+  spec.required_ruby_version = ">= 2.7"
 
   spec.files = `git ls-files | grep -v ^spec`.split($INPUT_RECORD_SEPARATOR)
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -31,5 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "standard"
 
-  spec.post_install_message = "This would be the last version that supports ruby 2.6"
+  spec.post_install_message = "This would be the last version that supports ruby 2.7"
 end

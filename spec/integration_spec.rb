@@ -121,7 +121,7 @@ describe "Integrations" do
         ).at_selector("body")
 
         expected_image_url =
-          "https://example.app.org/assets/rails-fbe4356d4aa42b95f211236439f3e675a5f9a7e6.png"
+          "https://example.app.org/assets/rails-fbe4356d.png"
 
         expect(document).to have_styling(
           "background" => "url(\"#{expected_image_url}\")"
@@ -154,7 +154,7 @@ describe "Integrations" do
         ).at_selector("body")
 
         expected_image_url =
-          "https://example.app.org/assets/rails-fbe4356d4aa42b95f211236439f3e675a5f9a7e6.png"
+          "https://example.app.org/assets/rails-fbe4356d.png"
 
         expect(document).to have_styling(
           "background" => "url(\"#{expected_image_url}\")"

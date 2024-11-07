@@ -19,10 +19,10 @@ require "action_view/railtie"
 Bundler.require(*Rails.groups)
 require "propshaft"
 
-module Rails70
+module Rails80
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 8.0
 
     # Configuration for the application, engines, and railties goes here.
     #

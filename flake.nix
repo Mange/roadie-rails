@@ -12,7 +12,7 @@
       devShell = with pkgs;
         mkShell {
           buildInputs = [
-            ruby
+            ruby_3_2
             libyaml
           ];
       };

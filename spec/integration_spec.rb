@@ -18,7 +18,7 @@ describe "Integrations" do
     RailsApp.new("Rails 7.1 with sprockets", "rails_71", min_ruby_version: "2.7"),
     RailsApp.new("Rails 7.1 with propshaft", "rails_71_with_propshaft", min_ruby_version: "2.7",
                                                                         asset_pipeline: :propshaft),
-    RailsApp.new("Rails 8.0 with propshaft", "rails_80_with_propshaft", min_ruby_version: "2.7",
+    RailsApp.new("Rails 8.0 with propshaft", "rails_80_with_propshaft", min_ruby_version: "3.2",
                                                                         asset_pipeline: :propshaft),
   ]
 

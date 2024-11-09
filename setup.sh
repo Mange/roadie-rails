@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This cannot be executed from within a Ruby-based environment (like Rake)
 # since Bundler will affect the subshell environments.
@@ -21,7 +21,6 @@ function update() {
 function install() {
   bundle install --quiet --path=.bundle && green "  OK"
 }
-
 
 root=$(dirname "$0")
 

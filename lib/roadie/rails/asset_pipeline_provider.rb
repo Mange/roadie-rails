@@ -52,6 +52,7 @@ module Roadie
         )
         \.               # Dot for the file extension
       /x
+      private_constant :DIGEST_PATTERN
 
       def remove_asset_digest(path)
         path.gsub(DIGEST_PATTERN, ".")

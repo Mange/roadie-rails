@@ -8,3 +8,8 @@ gem "sass-rails", ">= 6"
 gem "sprockets-rails"
 
 gem "roadie-rails", path: "../../.."
+
+gem "bigdecimal"
+gem "mutex_m"
+gem "logger"
+gem "benchmark"

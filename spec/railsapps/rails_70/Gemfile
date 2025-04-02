@@ -8,3 +8,8 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "sass-rails"
 gem "sprockets-rails"
 gem "roadie-rails", path: "../../.."
+
+gem "bigdecimal"
+gem "mutex_m"
+gem "logger"
+gem "benchmark"

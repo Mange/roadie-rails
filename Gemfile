@@ -8,4 +8,3 @@ gemspec
 # Added here so it does not show up on the Gemspec; I only want it for CI builds
 gem "simplecov", group: :test, require: false
 gem "simplecov-cobertura", group: :test, require: false
-

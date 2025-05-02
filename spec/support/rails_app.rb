@@ -14,7 +14,7 @@ class RailsApp
     maximum = @max_ruby_version || Gem::Version.new("100.0.0")
     version = Gem::Version.new(RUBY_VERSION)
 
-    version >= minimum && version <= maximum
+    version.between?(minimum, maximum)
   end
 
   def with_propshaft?

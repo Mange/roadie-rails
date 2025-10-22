@@ -4,6 +4,7 @@ module Roadie
   module Rails
     class AssetPipelineProvider
       include Roadie::AssetProvider
+
       attr_reader :pipeline
 
       def initialize(pipeline)

@@ -2,6 +2,9 @@
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v3.3.0...master)
 
+- Add support for Rails 8.1 - [Darryn](https://github.com/darryn02)
+- Fix compatibility with Propshaft 1.3.0 - [Gustavo Molinari](https://github.com/beetlegius-somos)
+
 ### 3.3.0
 
 [full changelog](https://github.com/Mange/roadie-rails/compare/v3.2.0...v3.3.0)

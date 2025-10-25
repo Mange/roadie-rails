@@ -13,12 +13,12 @@ module Roadie
         ]
 
         if app.config.respond_to?(:assets) && app.config.assets
-          if app.assets
+          if app.assets && defined?(Propshaft::Assembly) && app.assets.is_a?(Propshaft::Assembly)
+            # Initialize AssetPropshaftProvider immediately for Propshaft 1.3.0+ compatibility
+            # The after_initialize block was not executing correctly in Propshaft 1.3.0
+            config.roadie.asset_providers << AssetPropshaftProvider.new(app.assets)
+          elsif app.assets
             config.roadie.asset_providers << AssetPipelineProvider.new(app.assets)
-          elsif defined?(Propshaft)
-            config.after_initialize do |app|
-              config.roadie.asset_providers << AssetPropshaftProvider.new(app.assets)
-            end
           else
             app.config.assets.configure do |env|
               config.roadie.asset_providers <<

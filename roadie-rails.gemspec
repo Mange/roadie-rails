@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "railties", ">= 5.1", "< 8.2"
   spec.add_dependency "roadie", "~> 5.0"
 
-  spec.add_development_dependency "bundler", "~> 2.2"
+  spec.add_development_dependency "bundler", ">= 2.2"
   spec.add_development_dependency "rails", ">= 5.1", "< 8.2"
   spec.add_development_dependency "rspec", "~> 3.10"
   spec.add_development_dependency "rspec-collection_matchers"
